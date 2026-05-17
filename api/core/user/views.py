@@ -2,6 +2,7 @@ from django.http import Http404
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, AllowAny
 
 from rest_framework.views import APIView
+from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.pagination import PageNumberPagination
@@ -9,19 +10,26 @@ from rest_framework.pagination import PageNumberPagination
 from core.user.models import MyUser
 from core.user.serializers import MyUserSerializer, MyUserDetailSerializer
 from core.auth.permissions import IsAccountOwner
+from core.pagination import CustomPagination
 
 
-class MyUserList(APIView, PageNumberPagination):
+#class MyUserList(APIView, CustomPagination):
+#    serializer_class = MyUserSerializer
+#    permission_classes = (AllowAny,)
+#
+#    def get(self, request):
+#        user = MyUser.objects.all()
+#        if not request.user.is_authenticated or not request.user.is_admin:
+#            user = user.exclude(is_admin=True)
+#        results = self.paginate_queryset(user, request, view=self)
+#        serializer = self.serializer_class(results, many=True, context={"request": request})
+#        return Response(serializer.data)
+
+
+class MyUserList(generics.ListAPIView, CustomPagination):
+    queryset = MyUser.objects.exclude(pk=1)
     serializer_class = MyUserSerializer
     permission_classes = (AllowAny,)
-
-    def get(self, request):
-        user = MyUser.objects.all()
-        if not request.user.is_authenticated or not request.user.is_admin:
-            user = user.exclude(is_admin=True)
-        results = self.paginate_queryset(user, request, view=self)
-        serializer = self.serializer_class(results, many=True, context={"request": request})
-        return Response(serializer.data)
 
 
 class MyUserDetail(APIView):
