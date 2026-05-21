@@ -13,6 +13,10 @@ class Language(models.Model):
         return f"{self.name}"
 
 
+def get_poster_upload_path(instance: Lesson, filename: str) -> str:
+    return f"{instance.owner}/lessons/{filename}"
+
+
 class Lesson(AbstractModel):
 
     TYPE_CHOICES = {
@@ -26,6 +30,7 @@ class Lesson(AbstractModel):
     language = models.ForeignKey(Language, on_delete=models.PROTECT)
     description = models.CharField(max_length=255)
     text = models.TextField()
+    poster = models.ImageField(upload_to=get_poster_upload_path, null=True, blank=True)
     owner = models.ForeignKey(MyUser, on_delete=models.CASCADE)
 
     def __str__(self):

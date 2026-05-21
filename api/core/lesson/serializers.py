@@ -100,7 +100,7 @@ class LessonSerializer(AbstractSerializer):
 
     class Meta:
         model = Lesson
-        fields = ["id", "title", "type", "language", "description", "solved", "result", "text", "owner", "liked", "likes_count", "test", "created", "updated"]
+        fields = ["id", "title", "type", "language", "description", "poster", "solved", "result", "text", "owner", "liked", "likes_count", "test", "created", "updated"]
 
     def create(self, validated_data):
         language_data = validated_data.pop("language")
@@ -147,4 +147,4 @@ class LessonListSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Lesson
-        fields = ["id", "title", "type", "language", "description", "owner", "lesson_url"]
+        fields = ["id", "title", "type", "language", "description", "poster", "owner", "lesson_url",  "created", "updated"]

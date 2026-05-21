@@ -1,0 +1,31 @@
+@import "tailwindcss";
+
+
+@font-face {
+    font-family: "Google Sans";
+    src: 
+        url("/src/fonts/GoogleSans-VariableFont.ttf");
+}
+
+@font-face {
+    font-family: "Google Sans", Helvetica, sans-serif;
+    src:
+        url("/src/fonts/GoogleSans-Italic-VariableFont.ttf") format("ttf");
+    font-style: italic;
+}
+
+:root {
+    font-family: "Google Sans";
+}
+
+#root {
+    min-height: 100dvh;
+    width: 100%;
+
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    row-gap: 2rem;
+    
+    position: static;
+    overflow-x: hidden;
+}
