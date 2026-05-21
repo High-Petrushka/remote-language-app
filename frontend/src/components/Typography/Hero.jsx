@@ -14,7 +14,7 @@ export function Hero({ children, level }) {
             hero = <h4 className="text-[clamp(36px,5vw,40px)] font-semibold">{ children }</h4>
             break
         case 5:
-            hero = <h5 className="text-[32px] font-semibold">{ children }</h5>
+            hero = <h5 className="text-[32px] font-semibold leading-[1.1] line-clamp-2">{ children }</h5>
             break
         case 6:
             hero = <h6 className="text-[24px] font-semibold">{ children }</h6>

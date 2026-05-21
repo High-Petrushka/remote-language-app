@@ -64,12 +64,12 @@ export function Profile() {
                             <ProfileUserInfo title="Email" text={userInfo["email"]} link={`mailto:${userInfo["email"]}`} />
                         </div>
                     </div>
-                    <div className="grow">
+                    <div className="grow flex flex-col gap-3">
                         <Hero level={2}>{ userInfo["username"] }</Hero>
                         {userInfo["bio"] ? <p className="text-[16px] lg:text-lg">{ userInfo["bio"] }</p> : <p className="text-[16px] lg:text-lg">No bio is set.</p>}
                     </div>
                 </ProfileInfoLayout>
-                <ProfileLessonLayout>
+                <ProfileLessonLayout lessons={lessons.length}>
                     <Hero level={2}>Lessons by {userInfo.username}</Hero>
                     {userInfo.id === curUser ? <span>my profile</span> : <span></span>}
                     <div className="grid grid-cols-1 lg:grid-cols-2">

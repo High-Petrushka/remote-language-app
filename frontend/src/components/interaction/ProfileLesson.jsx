@@ -3,7 +3,6 @@ import { Bage } from "../Typography/Bage";
 import { Hero } from "../Typography/Hero";
 
 function getLessonDate(lessonDate) {
-    console.log(lessonDate)
     let formatDate = lessonDate.slice(0, 10).split("-").reverse();
 
     switch (formatDate[1]) {
@@ -50,21 +49,23 @@ function getLessonDate(lessonDate) {
 
 export function ProfileLesson({ title, imgSrc, type, language, lessonDate }) {
     return (
-        <div className="p-4 lg:p-8 flex flex-col lg:flex-row border-b border-l border-r border-zinc-900 first:border-t lg:even:border-l-0 lg:nth-[2]:border-t">
+        <div className="p-4 lg:p-8 flex flex-col lg:flex-row gap-12 border-b border-l border-r border-zinc-900 first:border-t lg:even:border-l-0 lg:nth-[2]:border-t">
             <div>
                 {
                     imgSrc ?
                         <img src={imgSrc} alt="Lesson poster" />
                     :
-                        <img src="/src/assets/icons/lesson-default.svg" alt="Lesson poster" className="w-37.5 h-auto mx-auto" />
+                        <img src="/src/assets/icons/lesson-default.svg" alt="Lesson poster" className="w-37.5 h-auto max-w-37.5 mx-auto" />
                 }
             </div>
-            <div>
+            <div className="grow flex flex-col justify-center gap-4">
                 <Hero level={5}>{ title }</Hero>
-                <div>
+                <div className="flex items-center justify-between">
                     <AddInfo title="Date">{ getLessonDate(lessonDate) }</AddInfo>
-                    <Bage>{ type }</Bage>
-                    <Bage>{ language }</Bage>
+                    <div className="flex gap-2">
+                        <Bage>{ type }</Bage>
+                        <Bage>{ language }</Bage>
+                    </div>
                 </div>
             </div>
         </div>

@@ -14,6 +14,7 @@ export function MyNavLink({ children, path, iconSrc, inverse }) {
                     setHidden(true);
                     if (inverse) {
                         delete localStorage["token"];
+                        delete localStorage["userId"];
                     }
                 }
             }

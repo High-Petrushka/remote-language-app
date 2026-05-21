@@ -7,6 +7,7 @@ import { MyNavLink } from "./MyNavLink";
 export function NavPanel() {
     const {hidden} = useContext(NavContext);
     const token = localStorage.getItem("token");
+    const userId = localStorage.getItem("userId");
 
     return (
         <div
@@ -16,8 +17,9 @@ export function NavPanel() {
             <NavPanelLayout>
                 <NavLinksLayout>
                     <MyNavLink path="/" iconSrc={"/src/assets/menu/house.svg"}>Home</MyNavLink>
+                    <MyNavLink path="/authors" iconSrc={"/src/assets/menu/authors.svg"}>Authors</MyNavLink>
                     {token ? 
-                        <MyNavLink path="/authors" iconSrc={"/src/assets/menu/authors.svg"}>Authors</MyNavLink>
+                        <MyNavLink path={`/profile/${userId}`} iconSrc={"/src/assets/menu/authors.svg"}>Profile</MyNavLink>
                     :
                     null
                     }
