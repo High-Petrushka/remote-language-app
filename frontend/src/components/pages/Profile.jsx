@@ -7,6 +7,7 @@ import { ProfileInfoLayout } from "../layout/ProfileInfoLayout";
 import { ProfileLessonLayout } from "../layout/ProfileLessonsLayout";
 import { ProfileUserInfo } from "../Typography/ProfileUserInfo";
 import { ProfileLesson } from "../interaction/ProfileLesson";
+import { ProfileInput } from "../interaction/ProfileInput";
 
 export function Profile() {
     const navigate = useNavigate();
@@ -15,6 +16,16 @@ export function Profile() {
 
     const [userInfo, setUserInfo] = useState({});
     const [lessons, setLessons] = useState([]);
+
+    const [newName, setNewName] = useState("")
+    const [newSurname, setNewSurname] = useState("");
+    const [newEmail, setNewEmail] = useState("");
+
+    let nameComp;
+    let surnameComp = null;
+    let emailComp;
+    // let [bioComp, setBioComp] = useState(null);
+    // let [avatarComp, setAvatarComp] = useState(null);
 
     
 
@@ -42,8 +53,28 @@ export function Profile() {
         user.then(response => {
             setUserInfo({...response});
             setLessons([...response["lesson_set"]]);
+            setNewEmail(response["email"]);
         });
     }, []);
+
+    if (Number(params["userId"]) === curUser) {
+        nameComp = "Owner";
+        surnameComp = <ProfileInput />
+        emailComp= <ProfileInput
+                title="Email"
+                id="email"
+                placeholder="you@example.com"
+                value={newEmail}
+                handleChange={(e) => setNewEmail(e.target.value)}
+                incorrect={false}
+                errorText="None"
+            />
+    } else {
+        nameComp = userInfo["first_name"] ? <ProfileUserInfo title="Name" text={userInfo["first_name"]} /> : <ProfileUserInfo title="Name" text="-" />;
+        surnameComp = userInfo["last_name"] ? <ProfileUserInfo title="Surname" text={userInfo["last_name"]} /> : <ProfileUserInfo title="Surname" text="-" />;
+        emailComp = <ProfileUserInfo title="Email" text={userInfo["email"]} link={`mailto:${userInfo["email"]}`} />;
+
+    }
 
     return (
         <Container>
@@ -59,9 +90,9 @@ export function Profile() {
                         }
                         </div>
                         <div className="pt-6">
-                            {userInfo["first_name"] ? <ProfileUserInfo title="Name" text={userInfo["first_name"]} /> : <ProfileUserInfo title="Name" text="-" /> }
+                            { nameComp }
                             {userInfo["last_name"] ? <ProfileUserInfo title="Surname" text={userInfo["last_name"]} /> : <ProfileUserInfo title="Surname" text="-" /> }
-                            <ProfileUserInfo title="Email" text={userInfo["email"]} link={`mailto:${userInfo["email"]}`} />
+                            { emailComp }
                         </div>
                     </div>
                     <div className="grow flex flex-col gap-3">
