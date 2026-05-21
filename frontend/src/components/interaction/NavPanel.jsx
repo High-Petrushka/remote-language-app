@@ -18,21 +18,23 @@ export function NavPanel() {
                 <NavLinksLayout>
                     <MyNavLink path="/" iconSrc={"/src/assets/menu/house.svg"}>Home</MyNavLink>
                     <MyNavLink path="/authors" iconSrc={"/src/assets/menu/authors.svg"}>Authors</MyNavLink>
-                    {token ? 
-                        <MyNavLink path={`/profile/${userId}`} iconSrc={"/src/assets/menu/authors.svg"}>Profile</MyNavLink>
-                    :
-                    null
-                    }
-                    {!token ? 
-                    <MyNavLink path="/login" iconSrc={"/src/assets/menu/login.svg"}>Login</MyNavLink>
-                    : 
-                    <MyNavLink path="/login" inverse={true} iconSrc={"/src/assets/menu/logout.svg"}>Logout</MyNavLink>
-                    }
-                    {!token ? 
-                        <MyNavLink path="/registration" iconSrc={"/src/assets/menu/registration.svg"}>Registration</MyNavLink>
-                    :
-                    null
-                    }
+                    <div className="pt-3 mt-3 border-t border-zinc-900">
+                        {token ? 
+                            <MyNavLink path={`/profile/${userId}`} iconSrc={"/src/assets/menu/menu-user.svg"}>Profile</MyNavLink>
+                        :
+                        null
+                        }
+                        {!token ? 
+                        <MyNavLink path="/login" iconSrc={"/src/assets/menu/login.svg"}>Login</MyNavLink>
+                        : 
+                        <MyNavLink path="/login" inverse={true} iconSrc={"/src/assets/menu/logout.svg"}>Logout</MyNavLink>
+                        }
+                        {!token ? 
+                            <MyNavLink path="/registration" iconSrc={"/src/assets/menu/registration.svg"}>Registration</MyNavLink>
+                        :
+                        null
+                        }
+                    </div>
                 </NavLinksLayout>
                 <span className="text-[12px] text-zinc-700 mx-auto">RLang &#174; 2026. All rights reserved.</span>
             </NavPanelLayout>
