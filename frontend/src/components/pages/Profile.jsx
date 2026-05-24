@@ -14,6 +14,7 @@ import { ProfileInput } from "../interaction/ProfileInput";
 import { Button } from "../interaction/Button";
 
 import { Common } from "../../Context/Common";
+import { Avatar } from "../interaction/Avatar";
 
 export function Profile() {
     const navigate = useNavigate();
@@ -33,6 +34,7 @@ export function Profile() {
     let surnameComp;
     let emailComp;
     let avatarComp;
+    let avatarInputComp;
     // let [bioComp, setBioComp] = useState(null);
 
 
@@ -45,8 +47,7 @@ export function Profile() {
 
         axios.put(url, formData, {headers: {"Authorization": token}})
             .then((response) => console.log(response))
-            .catch((err) => console.error(err))
-            .finally(() => console.log("Response completed"));
+            .catch((err) => console.error(err));
     }
     
 
@@ -80,6 +81,12 @@ export function Profile() {
         });
     }, []);
 
+    if (newAvatar) {
+        avatarComp = <Avatar imgSrc={URL.createObjectURL(document.getElementById("avatar").files[0])} imgAlt="New user avatar" width="[clamp(250px,40vw,350px)]" />
+    } else {
+        avatarComp = userInfo["avatar"] ? <img src={userInfo["avatar"]} className="w-[clamp(250px,40vw,350px)] h-auto aspect-square rounded-full mx-auto" /> : <img src="/src/assets/icons/user.svg" className="w-[clamp(250px,40vw,350px)] rounded-full mx-auto" />
+    }
+
     if (Number(params["userId"]) === curUser) {
         nameComp = <ProfileInput
                 title="Name"
@@ -108,11 +115,12 @@ export function Profile() {
                 incorrect={false}
                 errorText="None"
             />
-        avatarComp = (<div className="pt-6 flex items-center justify-between">
+        avatarInputComp = (<div className="pt-6 flex items-center justify-between">
                     <input
                         type="file"
                         id="avatar"
                         value={newAvatar}
+                        accept="image/*"
                         className="w-50 cursor-pointer active:outline active:outline-zinc-900"
                         onChange={(e) => setNewAvatar(e.target.value)}
                     />
@@ -122,7 +130,7 @@ export function Profile() {
         nameComp = userInfo["first_name"] ? <ProfileUserInfo title="Name" text={userInfo["first_name"]} /> : <ProfileUserInfo title="Name" text="-" />;
         surnameComp = userInfo["last_name"] ? <ProfileUserInfo title="Surname" text={userInfo["last_name"]} /> : <ProfileUserInfo title="Surname" text="-" />;
         emailComp = <ProfileUserInfo title="Email" text={userInfo["email"]} link={`mailto:${userInfo["email"]}`} />;
-        avatarComp = null;
+        avatarInputComp = null;
 
     }
 
@@ -132,13 +140,8 @@ export function Profile() {
                 <ProfileInfoLayout>
                     <div>
                         <div className="w-full h-fit pb-6 border-b border-zinc-900">
-                        {
-                            userInfo["avatar"] ?
-                                <img src={userInfo["avatar"]} className="w-[clamp(250px,40vw,350px)] h-auto aspect-square rounded-full mx-auto" />
-                            :
-                                <img src="/src/assets/icons/user.svg" className="w-[clamp(250px,40vw,350px)] rounded-full mx-auto" />
-                        }
                         { avatarComp }
+                        { avatarInputComp }
                         </div>
                         <div className="pt-6">
                             { nameComp }
