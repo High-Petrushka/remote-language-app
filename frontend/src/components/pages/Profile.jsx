@@ -9,9 +9,12 @@ import { ProfileUserInfo } from "../Typography/ProfileUserInfo";
 import { ProfileLesson } from "../interaction/ProfileLesson";
 import { ProfileInput } from "../interaction/ProfileInput";
 
+import axios from "axios";
+
 export function Profile() {
     const navigate = useNavigate();
     const curUser = Number(localStorage.getItem("userId"));
+    const token = localStorage.getItem("token");
     const params = useParams();
 
     const [userInfo, setUserInfo] = useState({});
@@ -20,13 +23,27 @@ export function Profile() {
     const [newName, setNewName] = useState("")
     const [newSurname, setNewSurname] = useState("");
     const [newEmail, setNewEmail] = useState("");
+    const [newAvatar, setNewAvatar] = useState("");
 
     let nameComp;
-    let surnameComp = null;
+    let surnameComp;
     let emailComp;
+    let avatarComp;
     // let [bioComp, setBioComp] = useState(null);
-    // let [avatarComp, setAvatarComp] = useState(null);
 
+
+    async function postProfileChanges(url) {
+        let formData = new FormData();
+        newAvatar ? formData.append("avatar", document.getElementById("avatar").files[0]) : null;
+        formData.append("first_name", newName);
+        formData.append("last_name", newSurname);
+        formData.append("email", newEmail);
+
+        axios.put(url, formData, {headers: {"Authorization": token}})
+            .then((response) => console.log(response))
+            .catch((err) => console.error(err))
+            .finally(() => console.log("Response completed"));
+    }
     
 
     async function getUser(url) {
@@ -53,13 +70,31 @@ export function Profile() {
         user.then(response => {
             setUserInfo({...response});
             setLessons([...response["lesson_set"]]);
+            setNewName(response["first_name"]);
+            setNewSurname(!response["last_name"] ? "" : response["last_name"]);
             setNewEmail(response["email"]);
         });
     }, []);
 
     if (Number(params["userId"]) === curUser) {
-        nameComp = "Owner";
-        surnameComp = <ProfileInput />
+        nameComp = <ProfileInput
+                title="Name"
+                id="name"
+                placeholder="Your name..."
+                value={newName}
+                handleChange={(e) => setNewName(e.target.value)}
+                incorrect={false}
+                errorText="None"
+            />;
+        surnameComp = <ProfileInput
+                title="Surname"
+                id="surname"
+                placeholder="Your surname..."
+                value={newSurname}
+                handleChange={(e) => setNewSurname(e.target.value)}
+                incorrect={false}
+                errorText="None"
+            />
         emailComp= <ProfileInput
                 title="Email"
                 id="email"
@@ -69,10 +104,12 @@ export function Profile() {
                 incorrect={false}
                 errorText="None"
             />
+        avatarComp = <input type="file" id="avatar" value={newAvatar} onChange={(e) => setNewAvatar(e.target.value)} />
     } else {
         nameComp = userInfo["first_name"] ? <ProfileUserInfo title="Name" text={userInfo["first_name"]} /> : <ProfileUserInfo title="Name" text="-" />;
         surnameComp = userInfo["last_name"] ? <ProfileUserInfo title="Surname" text={userInfo["last_name"]} /> : <ProfileUserInfo title="Surname" text="-" />;
         emailComp = <ProfileUserInfo title="Email" text={userInfo["email"]} link={`mailto:${userInfo["email"]}`} />;
+        avatarComp = null;
 
     }
 
@@ -88,11 +125,13 @@ export function Profile() {
                             :
                                 <img src="/src/assets/icons/user.svg" className="w-[clamp(250px,40vw,350px)] rounded-full mx-auto" />
                         }
+                        { avatarComp }
                         </div>
                         <div className="pt-6">
                             { nameComp }
-                            {userInfo["last_name"] ? <ProfileUserInfo title="Surname" text={userInfo["last_name"]} /> : <ProfileUserInfo title="Surname" text="-" /> }
+                            { surnameComp }
                             { emailComp }
+                            <button onClick={() => postProfileChanges("http://localhost:8000/users/17/")}>Save</button>
                         </div>
                     </div>
                     <div className="grow flex flex-col gap-3">

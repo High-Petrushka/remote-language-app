@@ -1,6 +1,7 @@
 import os
 from pathlib import Path
 from decouple import config
+from corsheaders.defaults import default_headers
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -124,3 +125,9 @@ MEDIA_URL = '/media/'
 AUTH_USER_MODEL = 'core_user.MyUser'
 
 CORS_ALLOWED_ORIGINS = config('CORS_ALLOWED_ORIGINS', default='').split(',')
+
+CORS_ALLOW_HEADERS = list(default_headers) + [
+    "Authorization",
+]
+
+CORS_ALLOW_CREDENTIALS = True
