@@ -1,10 +1,10 @@
 import { Container } from "../layout/Container";
-import { Hero } from "../Typography/Hero";
+import { DisplayHero } from "../Typography/DisplayHero";
 
 export function Lessons() {
     return (
         <Container>
-            <Hero level={1}>Lessons</Hero>
+            <DisplayHero>Lessons</DisplayHero>
         </Container>
     );
 }

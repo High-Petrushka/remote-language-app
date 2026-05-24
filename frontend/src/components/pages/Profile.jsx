@@ -15,6 +15,8 @@ import { Button } from "../interaction/Button";
 
 import { Common } from "../../Context/Common";
 import { Avatar } from "../interaction/Avatar";
+import { ProfileBioInput } from "../interaction/ProfileBioInput";
+import { PopMessage } from "../interaction/PopMessage";
 
 export function Profile() {
     const navigate = useNavigate();
@@ -29,13 +31,17 @@ export function Profile() {
     const [newSurname, setNewSurname] = useState("");
     const [newEmail, setNewEmail] = useState("");
     const [newAvatar, setNewAvatar] = useState("");
+    const [newBio, setNewBio] = useState("");
+
+    const[msgHidden, setMsgHidden] = useState(true);
+    const [message, setMessage] = useState("");
 
     let nameComp;
     let surnameComp;
     let emailComp;
     let avatarComp;
     let avatarInputComp;
-    // let [bioComp, setBioComp] = useState(null);
+    let bioComp;
 
 
     async function postProfileChanges(url) {
@@ -44,10 +50,23 @@ export function Profile() {
         formData.append("first_name", newName);
         formData.append("last_name", newSurname);
         formData.append("email", newEmail);
+        formData.append("bio", newBio);
 
         axios.put(url, formData, {headers: {"Authorization": token}})
-            .then((response) => console.log(response))
-            .catch((err) => console.error(err));
+            .then(() => {
+                setMessage("Saved successfully!");
+                setMsgHidden(false);
+                setTimeout(() => {
+                    setMsgHidden(true);
+                }, 5000);
+            })
+            .catch(() => {
+                setMessage("An error occured. Try again later.");
+                setMsgHidden(false);
+                setTimeout(() => {
+                    setMsgHidden(true);
+                }, 5000);
+            });
     }
     
 
@@ -77,6 +96,7 @@ export function Profile() {
             setLessons([...response["lesson_set"]]);
             setNewName(response["first_name"]);
             setNewSurname(!response["last_name"] ? "" : response["last_name"]);
+            setNewBio(!response["bio"] ? "" : response["bio"]);
             setNewEmail(response["email"]);
         });
     }, []);
@@ -115,6 +135,11 @@ export function Profile() {
                 incorrect={false}
                 errorText="None"
             />
+        bioComp = <ProfileBioInput
+                id="bio"
+                value={newBio}
+                handleChange={(e) => setNewBio(e.target.value)}
+             />
         avatarInputComp = (<div className="pt-6 flex items-center justify-between">
                     <input
                         type="file"
@@ -130,6 +155,7 @@ export function Profile() {
         nameComp = userInfo["first_name"] ? <ProfileUserInfo title="Name" text={userInfo["first_name"]} /> : <ProfileUserInfo title="Name" text="-" />;
         surnameComp = userInfo["last_name"] ? <ProfileUserInfo title="Surname" text={userInfo["last_name"]} /> : <ProfileUserInfo title="Surname" text="-" />;
         emailComp = <ProfileUserInfo title="Email" text={userInfo["email"]} link={`mailto:${userInfo["email"]}`} />;
+        bioComp = userInfo["bio"] ? <p className="text-[16px] lg:text-lg">{ userInfo["bio"] }</p> : <p className="text-[16px] lg:text-lg">No bio is set.</p>;
         avatarInputComp = null;
 
     }
@@ -154,7 +180,7 @@ export function Profile() {
                     </div>
                     <div className="grow flex flex-col gap-3">
                         <Hero level={2}>{ userInfo["username"] }</Hero>
-                        {userInfo["bio"] ? <p className="text-[16px] lg:text-lg">{ userInfo["bio"] }</p> : <p className="text-[16px] lg:text-lg">No bio is set.</p>}
+                        { bioComp }
                     </div>
                 </ProfileInfoLayout>
                 <ProfileLessonLayout lessons={lessons.length}>
@@ -179,6 +205,7 @@ export function Profile() {
                     </div>
                 </ProfileLessonLayout>
             </ProfileLayout>
+            <PopMessage msgText={message} hidden={msgHidden} />
         </Container>
     );
 }
