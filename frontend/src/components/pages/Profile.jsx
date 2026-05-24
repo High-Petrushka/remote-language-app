@@ -1,6 +1,9 @@
+import axios from "axios";
+
 import { useEffect, useState } from "react";
-import { Container } from "../layout/Container";
 import { useNavigate, useParams } from "react-router";
+
+import { Container } from "../layout/Container";
 import { Hero } from "../Typography/Hero";
 import { ProfileLayout } from "../layout/ProfileLayout";
 import { ProfileInfoLayout } from "../layout/ProfileInfoLayout";
@@ -8,8 +11,9 @@ import { ProfileLessonLayout } from "../layout/ProfileLessonsLayout";
 import { ProfileUserInfo } from "../Typography/ProfileUserInfo";
 import { ProfileLesson } from "../interaction/ProfileLesson";
 import { ProfileInput } from "../interaction/ProfileInput";
+import { Button } from "../interaction/Button";
 
-import axios from "axios";
+import { Common } from "../../Context/Common";
 
 export function Profile() {
     const navigate = useNavigate();
@@ -95,7 +99,7 @@ export function Profile() {
                 incorrect={false}
                 errorText="None"
             />
-        emailComp= <ProfileInput
+        emailComp = <ProfileInput
                 title="Email"
                 id="email"
                 placeholder="you@example.com"
@@ -104,7 +108,16 @@ export function Profile() {
                 incorrect={false}
                 errorText="None"
             />
-        avatarComp = <input type="file" id="avatar" value={newAvatar} onChange={(e) => setNewAvatar(e.target.value)} />
+        avatarComp = (<div className="pt-6 flex items-center justify-between">
+                    <input
+                        type="file"
+                        id="avatar"
+                        value={newAvatar}
+                        className="w-50 cursor-pointer active:outline active:outline-zinc-900"
+                        onChange={(e) => setNewAvatar(e.target.value)}
+                    />
+                    <img src="/src/assets/icons/save.svg" alt="File icon" />
+                </div>)
     } else {
         nameComp = userInfo["first_name"] ? <ProfileUserInfo title="Name" text={userInfo["first_name"]} /> : <ProfileUserInfo title="Name" text="-" />;
         surnameComp = userInfo["last_name"] ? <ProfileUserInfo title="Surname" text={userInfo["last_name"]} /> : <ProfileUserInfo title="Surname" text="-" />;
@@ -131,7 +144,9 @@ export function Profile() {
                             { nameComp }
                             { surnameComp }
                             { emailComp }
-                            <button onClick={() => postProfileChanges("http://localhost:8000/users/17/")}>Save</button>
+                        </div>
+                        <div className="mt-6" style={Number(params["userId"]) == curUser ? {"display": "block"} : {"display": "none"}}>
+                            <Button type="button" handleClick={() => postProfileChanges(`${Common.url}/users/${curUser}/`)}>Save</Button>
                         </div>
                     </div>
                     <div className="grow flex flex-col gap-3">
