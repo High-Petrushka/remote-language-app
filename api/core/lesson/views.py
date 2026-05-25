@@ -22,6 +22,16 @@ class LessonList(APIView, PageNumberPagination):
 
     def get(self, request):
         lessons = Lesson.objects.all()
+
+        category = request.GET.get("category")
+        language = request.GET.get("language")
+
+        if category:
+            lessons = lessons.filter(type=category)
+
+        if language:
+            lessons = lessons.filter(language=language)
+
         results = self.paginate_queryset(lessons, request, view=self)
         serializer = LessonListSerializer(results, many=True, context={"request": request})
         return Response(serializer.data)

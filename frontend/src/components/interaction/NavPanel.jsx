@@ -17,6 +17,7 @@ export function NavPanel() {
             <NavPanelLayout>
                 <NavLinksLayout>
                     <MyNavLink path="/" iconSrc={"/src/assets/menu/house.svg"}>Home</MyNavLink>
+                    <MyNavLink path="/lessons" iconSrc={"/src/assets/menu/lessons.svg"}>Lessons</MyNavLink>
                     <MyNavLink path="/authors" iconSrc={"/src/assets/menu/authors.svg"}>Authors</MyNavLink>
                     <div className="pt-3 mt-3 border-t border-zinc-900">
                         {token ? 

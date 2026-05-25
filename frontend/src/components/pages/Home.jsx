@@ -1,10 +1,11 @@
 import { Container } from "../layout/Container";
+import { HomeHero } from "../Typography/HomeHero";
 
 export function Home() {
 
   return (
     <Container>
-      <h1>Main page</h1>
+      <HomeHero>STUDY & FUN</HomeHero>
     </Container>
   );
 }
