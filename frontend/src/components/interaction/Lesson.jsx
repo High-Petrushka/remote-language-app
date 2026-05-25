@@ -1,4 +1,4 @@
-import { NavLink } from "react-router";
+import { Link } from "react-router";
 
 import { Bage } from "../Typography/Bage";
 import { Hero } from "../Typography/Hero";
@@ -26,8 +26,12 @@ export function Lesson({ id, title, type, language, description, poster, author,
                 <Hero level={5}>{ title }</Hero>
                 <p className="text-[16px] line-clamp-5 leading-[180%]">{ description }</p>
             </div>
-            <div>
+            <div className="flex items-center justify-between mt-auto">
                 <AddInfo title="Author">{ author }</AddInfo>
+                <Link to={`/lesson/${id}/`} className="group flex items-center">
+                    <span className="text-[16px] font-medium">Study</span>
+                    <img src="/src/assets/icons/arrow-right.svg" className="group-hover:translate-x-2 transition-transform duration-150" />
+                </Link>
             </div>
         </div>
     );

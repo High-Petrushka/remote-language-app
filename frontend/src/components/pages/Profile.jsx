@@ -99,7 +99,7 @@ export function Profile() {
             setNewBio(!response["bio"] ? "" : response["bio"]);
             setNewEmail(response["email"]);
         });
-    }, []);
+    }, [params.userId]);
 
     if (newAvatar) {
         avatarComp = <Avatar imgSrc={URL.createObjectURL(document.getElementById("avatar").files[0])} imgAlt="New user avatar" width="[clamp(250px,40vw,350px)]" />

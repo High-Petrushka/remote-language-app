@@ -10,24 +10,6 @@ class TaskSerializer(serializers.ModelSerializer):
         model = Task
         fields = ["id", "question", "answer", "variant_a", "variant_b", "variant_c", "variant_d"]
 
-    #def update(self, instance, validated_data):
-    #    task_mapping = {task.id: task for task in instance}
-    #    data_mapping = {item["id"]: item for item in validated_data}
-
-    #    ret = []
-    #    for task_id, data in data_mapping.items():
-    #        task = task_mapping.get(task_id, None)
-    #        if task is None:
-    #            ret.append(self.create(data))
-    #        else:
-    #            ret.append(self.update(task, data))
-
-    #    for task_id, task in task_mapping.items():
-    #        if task_id not in data_mapping:
-    #            task.delete()
-
-    #    return ret
-
 
 class TestSerializer(serializers.ModelSerializer):
     task_set = TaskSerializer(many=True, min_length=2, max_length=10)
@@ -122,9 +104,49 @@ class LessonSerializer(AbstractSerializer):
 
         if "test" in validated_data:
             test_data = validated_data.pop("test")
-            instance.test = test_data.get("test", instance.test)
+            try:
+                test = Test.objects.get(test_lesson=instance)
+                tasks = Task.objects.filter(task_test=test)
+                if len(tasks) > len(test_data["task_set"]):
+                    for i in range(len(test_data["task_set"]), len(tasks) + 1):
+                        tasks[i].delete()
+
+                for i in range(len(tasks)):
+                    tasks[i].question = test_data["task_set"][i]["question"]
+                    tasks[i].answer = test_data["task_set"][i]["answer"]
+                    tasks[i].variant_a = test_data["task_set"][i]["variant_a"]
+                    tasks[i].variant_b = test_data["task_set"][i]["variant_b"]
+                    tasks[i].variant_c = test_data["task_set"][i]["variant_c"]
+                    tasks[i].variant_d = test_data["task_set"][i]["variant_d"]
+                    tasks[i].save()
+
+                if len(test_data["task_set"]) > len(tasks):
+                    for i in range(len(tasks), len(test_data["task_set"])):
+                        new_task = Task()
+                        new_task.task_test = test
+                        new_task.question = test_data["task_set"][i]["question"]
+                        new_task.answer = test_data["task_set"][i]["answer"]
+                        new_task.variant_a = test_data["task_set"][i]["variant_a"]
+                        new_task.variant_b = test_data["task_set"][i]["variant_b"]
+                        new_task.variant_c = test_data["task_set"][i]["variant_c"]
+                        new_task.variant_d = test_data["task_set"][i]["variant_d"]
+                        new_task.save()
+            except Test.DoesNotExist:
+                test = Test.objects.create(test_lesson=instance)
+                for task in test_data["task_set"]:
+                    new_task = Task()
+                    new_task.task_test = test
+                    new_task.question = task["question"]
+                    new_task.answer = task["answer"]
+                    new_task.variant_a = task["variant_a"]
+                    new_task.variant_b = task["variant_b"]
+                    new_task.variant_c = task["variant_c"]
+                    new_task.variant_d = task["variant_d"]
+                    new_task.save()
+                instance.test = test
 
         instance.title = validated_data.get("title", instance.title)
+        instance.description = validated_data.get("description", instance.description)
         instance.type = validated_data.get("type", instance.type)
         instance.language = validated_data.get("language", instance.language)
         instance.text = validated_data.get("text", instance.text)

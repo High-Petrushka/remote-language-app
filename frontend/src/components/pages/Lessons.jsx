@@ -10,7 +10,6 @@ import { LessonsLayout } from "../layout/LessonsLayout";
 import { Lesson } from "../interaction/Lesson";
 import { LessonsPageLayout } from "../layout/LessonsPageLayout";
 import { FilterTitle } from "../Typography/FilterTitle";
-import { Bage } from "../Typography/Bage";
 import { FilterBtn } from "../interaction/FilterBtn";
 
 export function Lessons() {
@@ -65,6 +64,7 @@ export function Lessons() {
                         lessons.map((lesson) => (
                             <Lesson
                                 key={lesson.id}
+                                id={lesson.id}
                                 title={lesson.title}
                                 type={lesson.type}
                                 language={lesson.language}
