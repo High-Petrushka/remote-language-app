@@ -82,9 +82,7 @@ def like_lesson_view(request, lesson_pk):
 
     user.like_lesson(lesson)
 
-    serializer = LessonSerializer(lesson)
-
-    return Response(serializer.data, status=status.HTTP_200_OK)
+    return Response({"liked": True}, status=status.HTTP_200_OK)
 
 
 @api_view(["POST"])
@@ -95,9 +93,7 @@ def remove_like_view(request, lesson_pk):
 
     user.remove_like(lesson)
 
-    serializer = LessonSerializer(lesson)
-
-    return Response(serializer.data, status=status.HTTP_200_OK)
+    return Response({"liked": False}, status=status.HTTP_200_OK)
 
 @api_view(["POST"])
 @permission_classes([IsAuthenticatedOrReadOnly])

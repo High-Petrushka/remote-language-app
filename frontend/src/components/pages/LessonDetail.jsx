@@ -21,6 +21,7 @@ import { Button } from "../interaction/Button";
 import { TestResult } from "../Typography/TestResult";
 import { PopMessage } from "../interaction/PopMessage";
 import { TestShield } from "../interaction/TestShield";
+import { Like } from "../interaction/Like";
 
 export function LessonDetail() {
     const token = localStorage.getItem("token");
@@ -30,6 +31,7 @@ export function LessonDetail() {
     const [testAnswer, setTestAnswer] = useState([]);
     const [testRes, setTestRes] = useState(0);
     const [taskCount, setTaskCount] = useState(0); 
+    const [liked, setLiked] = useState(false);
 
     const [message, setMessage] = useState("");
     const [hidden, setHidden] = useState(true);
@@ -39,6 +41,7 @@ export function LessonDetail() {
         axios.get(`${Common.url}/lessons/${Number(params.lessonId)}`, config)
         .then((res) => {
             setLessonInfo(res.data);
+            setLiked(res.data["liked"]);
 
             if (res.data["test"]["task_set"]) {
                 setTestAnswer(res.data["test"]["task_set"].map(() => ""));
@@ -87,6 +90,31 @@ export function LessonDetail() {
         });
     }
 
+    async function handleLike() {
+        if (token) {
+            if (!liked) {
+                axios.post(`${Common.url}/lessons/${params.lessonId}/like/`, {}, {headers: {"Authorization": token}})
+                .then((res) => {
+                    getLessonInfo()
+                    setLiked(res.data["liked"]);
+                })
+            } else {
+                axios.post(`${Common.url}/lessons/${params.lessonId}/remove_like/`, {}, {headers: {"Authorization": token}})
+                .then((res) => {
+                    getLessonInfo()
+                    setLiked(res.data["liked"]);
+                })
+            }
+        } else {
+            setMessage(Common.authErrorMsg);
+            setHidden(false);
+            setTimeout(() => {
+                setHidden(true);
+            }, 5000);
+        }
+        
+    }
+
     useEffect(() => {
         getLessonInfo();
     }, []);
@@ -103,10 +131,14 @@ export function LessonDetail() {
                     </div>
                 </LessonTitleLayout>
                 <LessonContentLayout>
-                    <div className="flex items-center justify-between">
-                        <div className="flex gap-4 flex-wrap">
+                    <div className="flex items-end justify-between">
+                        <div className="flex gap-4 flex-wrap items-center">
                             <AddInfo title="Author">{ lessonInfo["owner"] }</AddInfo>
                             <AddInfo title="Date">{ lessonInfo["created"] ? getLessonDate(lessonInfo["created"]) : "" }</AddInfo>
+                            <div className="flex gap-1">
+                                <Like active={liked} handleClick={() => handleLike()} />
+                                { lessonInfo["likes_count"] ? lessonInfo["likes_count"] : 0 }
+                            </div>
                         </div>
                         <div className="flex gap-2">
                             <Bage>{ lessonInfo["type"] ? lessonInfo["type"] : "" }</Bage>
