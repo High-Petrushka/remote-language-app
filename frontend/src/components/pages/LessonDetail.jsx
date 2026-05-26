@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router";
+import { Link, useParams } from "react-router";
 
 import axios from "axios";
 
@@ -43,12 +43,13 @@ export function LessonDetail() {
             setLessonInfo(res.data);
             setLiked(res.data["liked"]);
 
-            if (res.data["test"]["task_set"]) {
+            if (res.data["test"]) {
                 setTestAnswer(res.data["test"]["task_set"].map(() => ""));
                 setTaskCount(res.data["test"]["task_set"].length);
             }
         })
-        .catch(() => {
+        .catch((err) => {
+            console.log(err)
             setMessage(Common.networkErrorMsg);
             setHidden(false);
             setTimeout(() => {
@@ -133,7 +134,9 @@ export function LessonDetail() {
                 <LessonContentLayout>
                     <div className="flex items-end justify-between">
                         <div className="flex gap-4 flex-wrap items-center">
-                            <AddInfo title="Author">{ lessonInfo["owner"] }</AddInfo>
+                            <Link to={`/profile/${lessonInfo["owner_id"]}/`}>
+                                <AddInfo title="Author">{ lessonInfo["owner"] }</AddInfo>
+                            </Link>
                             <AddInfo title="Date">{ lessonInfo["created"] ? getLessonDate(lessonInfo["created"]) : "" }</AddInfo>
                             <div className="flex gap-1">
                                 <Like active={liked} handleClick={() => handleLike()} />

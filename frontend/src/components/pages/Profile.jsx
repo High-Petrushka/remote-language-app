@@ -193,6 +193,7 @@ export function Profile() {
                                 lessons.map(lesson => (
                                     <ProfileLesson
                                         key={lesson["id"]}
+                                        id={lesson["id"]}
                                         title={lesson["title"]}
                                         imgSrc={lesson["poster"]}
                                         type={lesson["type"]}

@@ -72,6 +72,7 @@ export function Lessons() {
                                 poster={lesson.poster}
                                 author={lesson.owner}
                                 created={lesson.created}
+                                owner_id={lesson.owner_id}
                             />
                         ))
                     }

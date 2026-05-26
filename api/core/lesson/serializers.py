@@ -40,6 +40,7 @@ class TestCheckSerializer(serializers.ModelSerializer):
 
 class LessonSerializer(AbstractSerializer):
     owner = serializers.ReadOnlyField(source="owner.username")
+    owner_id = serializers.ReadOnlyField(source="owner.id")
     test = TestSerializer(required=False)
     language = serializers.StringRelatedField()
     liked = serializers.SerializerMethodField()
@@ -82,7 +83,7 @@ class LessonSerializer(AbstractSerializer):
 
     class Meta:
         model = Lesson
-        fields = ["id", "title", "type", "language", "description", "poster", "solved", "result", "text", "owner", "liked", "likes_count", "test", "created", "updated"]
+        fields = ["id", "title", "type", "language", "description", "poster", "solved", "result", "text", "owner", "owner_id", "liked", "likes_count", "test", "created", "updated"]
 
     def create(self, validated_data):
         language_data = validated_data.pop("language")
@@ -158,6 +159,7 @@ class LessonSerializer(AbstractSerializer):
 
 class LessonListSerializer(serializers.HyperlinkedModelSerializer):
     owner = serializers.ReadOnlyField(source="owner.username")
+    owner_id = serializers.ReadOnlyField(source="owner.id")
     lesson_url = serializers.HyperlinkedIdentityField(view_name="lesson-detail")
     language = serializers.StringRelatedField()
 
@@ -169,4 +171,4 @@ class LessonListSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Lesson
-        fields = ["id", "title", "type", "language", "description", "poster", "owner", "lesson_url",  "created", "updated"]
+        fields = ["id", "title", "type", "language", "description", "poster", "owner", "owner_id", "lesson_url",  "created", "updated"]
