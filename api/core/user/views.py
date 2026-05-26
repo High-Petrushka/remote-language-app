@@ -51,7 +51,7 @@ class MyUserDetail(APIView):
 
     def put(self, request, pk):
         user = self.get_object(pk)
-        serializer = self.serializer_class(user, data=request.data, partial=True)
+        serializer = self.serializer_class(user, data=request.data, partial=True, context={"request": request})
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data)

@@ -61,7 +61,7 @@ export function Profile() {
                 }, 5000);
             })
             .catch(() => {
-                setMessage("An error occured. Try again later.");
+                setMessage(Common.networkErrorMsg);
                 setMsgHidden(false);
                 setTimeout(() => {
                     setMsgHidden(true);
@@ -185,7 +185,6 @@ export function Profile() {
                 </ProfileInfoLayout>
                 <ProfileLessonLayout lessons={lessons.length}>
                     <Hero level={2}>Lessons by {userInfo.username}</Hero>
-                    {userInfo.id === curUser ? <span>my profile</span> : <span></span>}
                     <div className="grid grid-cols-1 lg:grid-cols-2">
                         {
                             lessons.length === 0 ?

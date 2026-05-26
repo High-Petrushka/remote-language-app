@@ -139,7 +139,7 @@ def check_solution_view(request, lesson_pk, test_pk):
         }
     else:
         data = {
-            "message": "Not enough correct answers.",
+            "message": "Not enough right answers.",
             "result": str(result),
         }
 
