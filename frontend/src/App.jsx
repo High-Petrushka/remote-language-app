@@ -13,6 +13,7 @@ import { Authors } from "./components/pages/Authors.jsx";
 import { Profile } from "./components/pages/Profile.jsx";
 import { LessonDetail } from "./components/pages/LessonDetail.jsx";
 import { NotFound } from "./components/pages/NotFound.jsx";
+import { Creation } from "./components/pages/Creation.jsx";
 
 function App() {
 
@@ -30,6 +31,7 @@ function App() {
         <Route path="authors" element={<Authors />} />
         <Route path="profile/:userId/" element={<Profile />} />
         <Route path="lesson/:lessonId/" element={<LessonDetail />} />
+        <Route path="creation/" element={<Creation />} />
         <Route path='registration' element={<Registration />} />
         <Route path='login' element={<Login />} />
 

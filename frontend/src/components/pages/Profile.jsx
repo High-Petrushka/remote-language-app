@@ -138,6 +138,7 @@ export function Profile() {
         bioComp = <ProfileBioInput
                 id="bio"
                 value={newBio}
+                placeholder="Your bio..."
                 handleChange={(e) => setNewBio(e.target.value)}
              />
         avatarInputComp = (<div className="pt-6 flex items-center justify-between">

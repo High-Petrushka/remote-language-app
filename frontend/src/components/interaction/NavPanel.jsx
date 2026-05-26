@@ -20,6 +20,11 @@ export function NavPanel() {
                     <MyNavLink path="/lessons" iconSrc={"/src/assets/menu/lessons.svg"}>Lessons</MyNavLink>
                     <MyNavLink path="/authors" iconSrc={"/src/assets/menu/authors.svg"}>Authors</MyNavLink>
                     <div className="pt-3 mt-3 border-t border-zinc-900">
+                        {token ?
+                            <MyNavLink path="/creation" iconSrc={"/src/assets/menu/plus.svg"}>Create</MyNavLink>
+                        :
+                        null
+                        }
                         {token ? 
                             <MyNavLink path={`/profile/${userId}`} iconSrc={"/src/assets/menu/menu-user.svg"}>Profile</MyNavLink>
                         :

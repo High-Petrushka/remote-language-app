@@ -1,0 +1,111 @@
+import { useState } from "react";
+
+import { ProfileBioInput } from "../interaction/ProfileBioInput";
+import { Container } from "../layout/Container";
+import { LessonBodyLayout } from "../layout/LessonBodyLayout";
+import { LessonContentLayout } from "../layout/LessonContentLayout";
+import { LessonDetailLayout } from "../layout/LessonDetailLayout";
+import { LessonTestLayout } from "../layout/LessonTestLayout";
+import { LessonTitleLayout } from "../layout/LessonTitleLayout";
+import { Hero } from "../Typography/Hero";
+import { FilterTitle } from "../Typography/FilterTitle";
+import { FilterBtn } from "../interaction/FilterBtn";
+import { CreationInputLayout } from "../layout/CreationInputLayout";
+import { Button } from "../interaction/Button";
+
+export function Creation() {
+    const [title, setTitle] = useState("");
+    const [description, setDescription] = useState("");
+    const [category, setCategory] = useState("1");
+    const [language, setLanguage] = useState("1");
+    const [poster, setPoster] = useState("");
+    const [text, setText] = useState("");
+    const [test, setTest] = useState(false);
+
+    return (
+        <Container>
+            <LessonDetailLayout>
+                <LessonTitleLayout>
+                    <CreationInputLayout>
+                        <Hero level={6}>Title</Hero>
+                        <ProfileBioInput
+                            id="title"
+                            value={title}
+                            placeholder={"Lesson's title..."}
+                            handleChange={(e) => setTitle(e.target.value)}
+                        />
+                    </CreationInputLayout>
+                    <CreationInputLayout>
+                        <Hero level={6}>Description</Hero>
+                        <ProfileBioInput
+                            id="description"
+                            value={description}
+                            placeholder={"Lesson's description..."}
+                            handleChange={(e) => setDescription(e.target.value)}
+                        />
+                    </CreationInputLayout>
+                </LessonTitleLayout>
+                <LessonContentLayout>
+                    <div className="flex flex-col gap-4">
+                        <div className="flex items-center justify-between">
+                            <FilterTitle>CATEGORY</FilterTitle>
+                            <div className="flex gap-2">
+                                <FilterBtn handleClick={() => setCategory("1")} active={category === "1"}>reading</FilterBtn>
+                                <FilterBtn handleClick={() => setCategory("2")} active={category === "2"}>grammar</FilterBtn>
+                                <FilterBtn handleClick={() => setCategory("3")} active={category === "3"}>speaking</FilterBtn>
+                            </div>
+                        </div>
+                        <div className="flex items-center justify-between">
+                            <div className="flex gap-2 flex-wrap">
+                                <FilterBtn handleClick={() => setLanguage("1")} active={language === "1"}>english</FilterBtn>
+                                <FilterBtn handleClick={() => setLanguage("2")} active={language === "2"}>german</FilterBtn>
+                                <FilterBtn handleClick={() => setLanguage("3")} active={language === "3"}>french</FilterBtn>
+                                <FilterBtn handleClick={() => setLanguage("4")} active={language === "4"}>chinese</FilterBtn>
+                                <FilterBtn handleClick={() => setLanguage("5")} active={language === "5"}>japanese</FilterBtn>
+                            </div>
+                            <FilterTitle>LANGUAGE</FilterTitle>
+                        </div>
+                    </div>
+                    <LessonBodyLayout>
+                        <CreationInputLayout>
+                            <Hero level={6}>Poster</Hero>
+                            {
+                                poster ?
+                                    <img src={poster ? URL.createObjectURL(document.getElementById("poster").files[0]) : "/src/assets/icons/lesson-default.svg"} alt="User poster image" className="w-[min(50vw,400px)] mx-auto" />
+                                :
+                                    <img src="/src/assets/icons/lesson-default.svg" alt="Default poster image" className="w-[min(50vw,400px)] mx-auto" />
+                            }
+                            <div className="pt-6 flex items-center justify-between w-[min(392px,100%)] mx-auto">
+                                <input
+                                    type="file"
+                                    id="poster"
+                                    value={poster}
+                                    accept="image/*"
+                                    className="w-50 cursor-pointer active:outline active:outline-zinc-900"
+                                    onChange={(e) => setPoster(e.target.value)}
+                                />
+                                <img src="/src/assets/icons/save.svg" alt="File icon" />
+                            </div>
+                        </CreationInputLayout>
+                        <CreationInputLayout>
+                            <Hero level={6}>Text</Hero>
+                            <ProfileBioInput
+                                id="text"
+                                value={text}
+                                placeholder={"Lesson's text..."}
+                                handleChange={(e) => setText(e.target.value)}
+                            />
+                        </CreationInputLayout>
+                    </LessonBodyLayout>
+                </LessonContentLayout>
+                <LessonTestLayout test={true}>
+                    <div className="flex items-center justify-between gap-2 flex-wrap">
+                        <Hero level={2}>Lesson's Test</Hero>
+                        <Button>+</Button>
+                    </div>
+                    <div className="grid grid-cols-1 lg:grid-cols-2"></div>
+                </LessonTestLayout>
+            </LessonDetailLayout>
+        </Container>
+    );
+}

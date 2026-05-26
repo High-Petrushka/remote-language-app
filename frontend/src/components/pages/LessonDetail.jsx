@@ -132,6 +132,19 @@ export function LessonDetail() {
                     </div>
                 </LessonTitleLayout>
                 <LessonContentLayout>
+                    <LessonBodyLayout>
+                        <div>
+                            {
+                                lessonInfo["poster"] ?
+                                    <img src={lessonInfo["poster"] ? lessonInfo["poster"] : "/src/assets/icons/lesson-default.svg"} className="w-[min(50vw,400px)] mx-auto" />
+                                :
+                                    <img src="/src/assets/icons/lesson-default.svg" className="w-[min(50vw,400px)] mx-auto" />
+                            }
+                        </div>
+                        <div>
+                            <PlainText>{ lessonInfo["text"] ? lessonInfo["text"] : ""}</PlainText>
+                        </div>
+                    </LessonBodyLayout>
                     <div className="flex items-end justify-between">
                         <div className="flex gap-4 flex-wrap items-center">
                             <Link to={`/profile/${lessonInfo["owner_id"]}/`}>
@@ -148,19 +161,6 @@ export function LessonDetail() {
                             <Bage>{ lessonInfo["language"] ? lessonInfo["language"] : "" }</Bage>
                         </div>
                     </div>
-                    <LessonBodyLayout>
-                        <div>
-                            {
-                                lessonInfo["poster"] ?
-                                    <img src={lessonInfo["poster"] ? lessonInfo["poster"] : "/src/assets/icons/lesson-default.svg"} className="w-[min(50vw,400px)] mx-auto" />
-                                :
-                                    <img src="/src/assets/icons/lesson-default.svg" className="w-[min(50vw,400px)] mx-auto" />
-                            }
-                        </div>
-                        <div>
-                            <PlainText>{ lessonInfo["text"] ? lessonInfo["text"] : ""}</PlainText>
-                        </div>
-                    </LessonBodyLayout>
                 </LessonContentLayout>
                 {token ? (
                 <LessonTestLayout test={lessonInfo["test"] ? lessonInfo["test"] : null}>
