@@ -6,17 +6,22 @@ from core.serializers import ApiRootSerializer
 from core.user.models import MyUser
 from core.lesson.models import Lesson
 from core.lesson.serializers import LessonListSerializer
+from core.user.serializers import MyUserSerializer
 
 
 @api_view(["GET"])
 def api_root(request, format=None):
-    lessons = Lesson.objects.order_by("-pk")[:3]
+    lessons = Lesson.objects.order_by("-pk")[:6]
     resent_lessons = LessonListSerializer(lessons, many=True, context={"request": request})
+
+    authors = MyUser.objects.exclude(pk=1)[:4]
+    authors_serializer = MyUserSerializer(authors, many=True, context={"request": request})
 
     response_dict = {
         "users": reverse("users", request=request, format=format),
         "lessons": reverse("lessons", request=request, format=format),
         "resent_lessons": resent_lessons.data,
+        "authors": authors_serializer.data,
     }
 
     if request.auth is None:

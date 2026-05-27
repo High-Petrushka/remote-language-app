@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { ProfileBioInput } from "../interaction/ProfileBioInput";
 import { Container } from "../layout/Container";
@@ -12,8 +12,18 @@ import { FilterTitle } from "../Typography/FilterTitle";
 import { FilterBtn } from "../interaction/FilterBtn";
 import { CreationInputLayout } from "../layout/CreationInputLayout";
 import { Button } from "../interaction/Button";
+import { TestCreationItemLayout } from "../layout/TestCreationItemLayout";
+import { PopMessage } from "../interaction/PopMessage";
+import { TestCreationInput } from "../interaction/TestCreationInput";
+import { RadioInput } from "../interaction/RadioInput";
+import axios from "axios";
+import { useNavigate } from "react-router";
+import { Common } from "../../Context/Common";
 
 export function Creation() {
+    const navigate = useNavigate();
+    const token = localStorage.getItem("token");
+
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [category, setCategory] = useState("1");
@@ -21,12 +31,103 @@ export function Creation() {
     const [poster, setPoster] = useState("");
     const [text, setText] = useState("");
     const [test, setTest] = useState(false);
+    const [taskSet, setTaskSet] = useState([]);
+
+    const [message, setMessage] = useState("");
+    const [hidden, setHidden] = useState(true);
+
+    const makeTest = () => {
+        if (!test) {
+            setTaskSet(new Array(2).fill({
+                question: "",
+                answer: "",
+                variant_a: "",
+                variant_b: "",
+                variant_c: "",
+                variant_d: "",
+            }));
+        } else {
+            setTaskSet([]);
+        }
+    }
+
+    const addTask = () => {
+        if (taskSet.length < 10) {
+            setTaskSet([...taskSet, {
+                question: "",
+                answer: "",
+                variant_a: "",
+                variant_b: "",
+                variant_c: "",
+                variant_d: "",
+            }]);
+        } else {
+            setMessage("A test can contain no more than 10 tasks.");
+            setHidden(false);
+            setTimeout(() => {
+                setHidden(true);
+            }, 5000);
+        }
+    }
+
+    async function createLesson(url) {
+        let formData = new FormData();
+        poster ? formData.append("avatar", document.getElementById("poster").files[0]) : null;
+        test ? formData.append("test[task_set]", JSON.stringify(taskSet)) : null;
+        formData.append("title", title);
+        formData.append("description", description);
+        formData.append("type", category);
+        formData.append("language", language);
+        formData.append("text", text);
+
+        axios.post(url, formData, {headers: {"Authorization": token}})
+        .then(() => {
+            setMessage("Created successfully.");
+            setHidden(false);
+            setTimeout(() => {
+                setHidden(true);
+            }, 5000);
+
+            setTitle("");
+            setDescription("");
+            setCategory("1");
+            setLanguage("1");
+            setText("");
+            setPoster("");
+            setTest(false);
+            setTaskSet([]);
+        })
+        .catch((err) => {
+            console.log(err)
+            if (axios.isAxiosError(err)) {
+                if (err.response.status === 400) {
+                    setMessage("Fill all fields!")
+                    setHidden(false);
+                    setTimeout(() => {
+                        setHidden(true);
+                    }, 5000);
+                }
+            } else {
+                setMessage(Common.networkErrorMsg);
+                setHidden(false);
+                setTimeout(() => {
+                    setHidden(true);
+                }, 5000);
+            }
+        });
+    }
+
+    useEffect(() => {
+        if (!token) {
+            navigate("/");
+        }
+    }, []);
 
     return (
         <Container>
             <LessonDetailLayout>
                 <LessonTitleLayout>
-                    <CreationInputLayout>
+                    <div className="min-h-50 flex flex-col gap-2">
                         <Hero level={6}>Title</Hero>
                         <ProfileBioInput
                             id="title"
@@ -34,8 +135,8 @@ export function Creation() {
                             placeholder={"Lesson's title..."}
                             handleChange={(e) => setTitle(e.target.value)}
                         />
-                    </CreationInputLayout>
-                    <CreationInputLayout>
+                    </div>
+                    <div className="min-h-50 flex flex-col gap-2">
                         <Hero level={6}>Description</Hero>
                         <ProfileBioInput
                             id="description"
@@ -43,7 +144,7 @@ export function Creation() {
                             placeholder={"Lesson's description..."}
                             handleChange={(e) => setDescription(e.target.value)}
                         />
-                    </CreationInputLayout>
+                    </div>
                 </LessonTitleLayout>
                 <LessonContentLayout>
                     <div className="flex flex-col gap-4">
@@ -87,7 +188,7 @@ export function Creation() {
                                 <img src="/src/assets/icons/save.svg" alt="File icon" />
                             </div>
                         </CreationInputLayout>
-                        <CreationInputLayout>
+                        <div className="min-h-50 flex flex-col gap-2">
                             <Hero level={6}>Text</Hero>
                             <ProfileBioInput
                                 id="text"
@@ -95,17 +196,132 @@ export function Creation() {
                                 placeholder={"Lesson's text..."}
                                 handleChange={(e) => setText(e.target.value)}
                             />
-                        </CreationInputLayout>
+                        </div>
                     </LessonBodyLayout>
                 </LessonContentLayout>
                 <LessonTestLayout test={true}>
                     <div className="flex items-center justify-between gap-2 flex-wrap">
                         <Hero level={2}>Lesson's Test</Hero>
-                        <Button>+</Button>
+                        <div className={test ? "grid grid-cols-2 gap-2" : ""}>
+                        {
+                            test ?
+                                <Button type="button" handleClick={() => addTask()}>Add Task</Button>
+                            :
+                                null
+                        }
+                        <Button type="button" handleClick={() => {setTest(!test); makeTest()}}>{!test ? "Create Test" : "Remove Test"}</Button>
+                        </div>
                     </div>
-                    <div className="grid grid-cols-1 lg:grid-cols-2"></div>
+                    <div className="grid grid-cols-1 lg:grid-cols-2">
+                        {
+                            taskSet.map((item, index) => (
+                                <TestCreationItemLayout key={index}>
+                                    <CreationInputLayout>
+                                        <Hero level={6}>Question</Hero>
+                                        <TestCreationInput 
+                                            value={taskSet[index]["question"]}
+                                            placeholder="Task question..."
+                                            handleChange={(e) => {
+                                                setTaskSet(taskSet.map((task, i) => {
+                                                    if (i === index) {
+                                                        return {...task, question: e};
+                                                    } else {
+                                                        return task;
+                                                    }
+                                                }));
+                                            }}
+                                        />
+                                    </CreationInputLayout>
+                                    <CreationInputLayout>
+                                        <Hero level={6}>Answer</Hero>
+                                        <TestCreationInput 
+                                            value={taskSet[index]["answer"]}
+                                            placeholder="Task answer"
+                                            handleChange={(e) => {
+                                                setTaskSet(taskSet.map((task, i) => {
+                                                    if (i === index) {
+                                                        return {...task, answer: e}
+                                                    } else {
+                                                        return task;
+                                                    }
+                                                }))
+                                            }}
+                                        />
+                                    </CreationInputLayout>
+                                    <div className="flex flex-col gap-2 mt-auto">
+                                        <div className="flex items-center gap-4">
+                                            <RadioInput active={false} handleClick={() => null}>A</RadioInput>
+                                            <TestCreationInput 
+                                                value={taskSet[index]["variant_a"]}
+                                                placeholder="Choice A..."
+                                                handleChange={(e) => {
+                                                    setTaskSet(taskSet.map((task, i) => {
+                                                        if (i === index) {
+                                                            return {...task, variant_a: e};
+                                                        } else {
+                                                            return task;
+                                                        }
+                                                    }));
+                                                }}
+                                            />
+                                        </div>
+                                        <div className="flex items-center gap-4">
+                                            <RadioInput active={false} handleClick={() => null}>B</RadioInput>
+                                            <TestCreationInput 
+                                                value={taskSet[index]["variant_b"]}
+                                                placeholder="Choice B..."
+                                                handleChange={(e) => {
+                                                    setTaskSet(taskSet.map((task, i) => {
+                                                        if (i === index) {
+                                                            return {...task, variant_b: e};
+                                                        } else {
+                                                            return task;
+                                                        }
+                                                    }));
+                                                }}
+                                            />
+                                        </div>
+                                        <div className="flex items-center gap-4">
+                                            <RadioInput active={false} handleClick={() => null}>C</RadioInput>
+                                            <TestCreationInput 
+                                                value={taskSet[index]["variant_c"]}
+                                                placeholder="Choice C..."
+                                                handleChange={(e) => {
+                                                    setTaskSet(taskSet.map((task, i) => {
+                                                        if (i === index) {
+                                                            return {...task, variant_c: e};
+                                                        } else {
+                                                            return task;
+                                                        }
+                                                    }));
+                                                }}
+                                            />
+                                        </div>
+                                        <div className="flex items-center gap-4">
+                                            <RadioInput active={false} handleClick={() => null}>D</RadioInput>
+                                            <TestCreationInput 
+                                                value={taskSet[index]["variant_d"]}
+                                                placeholder="Choice D..."
+                                                handleChange={(e) => {
+                                                    setTaskSet(taskSet.map((task, i) => {
+                                                        if (i === index) {
+                                                            return {...task, variant_d: e}
+                                                        } else {
+                                                            return task;
+                                                        }
+                                                    }));
+                                                }}
+                                            />
+                                        </div>
+                                    </div>
+                                </TestCreationItemLayout>
+                            ))
+                        }
+                    </div>
                 </LessonTestLayout>
+                <Button type="button" handleClick={() => createLesson(`${Common.url}/lessons/`)}>Create Lesson</Button>
             </LessonDetailLayout>
+            <PopMessage msgText={message} hidden={hidden} />
         </Container>
     );
 }

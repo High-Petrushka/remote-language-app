@@ -8,7 +8,7 @@ import { getLessonDate } from "../../Context/getLessonDate";
 
 export function Lesson({ id, title, type, language, description, poster, author, created, owner_id }) {
     return (
-        <div className="flex flex-col gap-8 p-7 border-l border-b border-r first:border-t md:border-r-0 md:even:border-r md:last:border-r md:nth-[2]:border-t xl:even:border-r-0 xl:nth-[3]:border-t xl:nth-[3n]:border-r border-zinc-900">
+        <div className="flex flex-col gap-8 p-7 border-l border-b border-r first:border-t md:border-r-0 md:last:border-r md:nth-[2]:border-t xl:nth-[3]:border-t xl:nth-[3n]:border-r xl:last:border-r border-zinc-900">
             <div className="flex items-center justify-between">
                 <p>{ getLessonDate(created) }</p>
                 <div className="flex gap-2">
