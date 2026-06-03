@@ -14,7 +14,6 @@ export function Home() {
   async function getHomeInfo() {
     axios.get(`${Common.url}/`)
     .then((res) => {
-      console.log(res.data);
       setHomeInfo(res.data);
     })
     .catch((err) => {
@@ -37,6 +36,7 @@ export function Home() {
               homeInfo["resent_lessons"] ?
                 homeInfo["resent_lessons"].map((lesson) => (
                   <HomeLesson 
+                    key={lesson["id"]}
                     id={lesson["id"]}
                     title={lesson["title"]}
                     description={lesson["description"]}
