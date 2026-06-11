@@ -16,5 +16,6 @@ urlpatterns = [
     path("", include('core.lesson.urls')),
     path("", include('core.administration.urls')),
     path("", include('core.comment.urls')),
+    path("", include('core.feedback.urls')),
     path(r'api-token-auth/', views.obtain_auth_token, name="auth-token"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
