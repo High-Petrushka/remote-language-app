@@ -1,5 +1,5 @@
 from django.urls import path
-from core.feedback.views import FeedbackView, FeedbackAPIView
+from core.feedback.views import FeedbackAPIView
 
 
 urlpatterns = [

@@ -9,4 +9,4 @@ class FeedbackSerializer(serializers.ModelSerializer):
     user_first_name = ReadOnlyField(source="user.first_name")
     class Meta:
         model = Feedback
-        fields = ["body", "grade", "user_id", "user_first_name", "selected"]
+        fields = ["id", "body", "grade", "user_id", "user_first_name", "selected"]

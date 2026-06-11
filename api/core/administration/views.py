@@ -12,6 +12,8 @@ from core.administration.serializers import LanguageSerializer
 from core.user.models import MyUser
 from core.user.serializers import MyUserSerializer, MyUserDetailSerializer
 from core.administration.serializers import BlockUserSerializer
+from core.feedback.models import Feedback
+from core.feedback.serializers import FeedbackSerializer
 
 
 class AdministrationRootView(APIView):
@@ -89,3 +91,21 @@ def block_user(request, pk):
     serializer.save()
 
     return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+class SelectFeedback(APIView):
+    serializer_class = FeedbackSerializer
+    permission_classes = (IsAdminUser,)
+
+    def get_object(self, pk):
+        try:
+            return Feedback.objects.get(pk=pk)
+        except (ValueError, TypeError, Feedback.DoesNotExist):
+            return Http404
+
+    def put(self, request, pk):
+        user_feedback = self.get_object(pk=pk)
+        serializer = FeedbackSerializer(user_feedback, data=request.data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_200_OK)
