@@ -39,7 +39,6 @@ class LessonList(APIView, PageNumberPagination):
 
     def post(self, request):
         serializer = self.serializer_class(data=request.data)
-        print(request.data)
         serializer.is_valid(raise_exception=True)
         if request.data.get("test"):
             serializer.save(owner=request.user, language=request.data.get('language'), test=request.data.get("test"))

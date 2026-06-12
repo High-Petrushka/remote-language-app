@@ -18,7 +18,7 @@ export function Lesson({ id, title, type, language, description, poster, author,
             </div>
             {
                 poster ?
-                    <img alt="Lesson poster" className="w-62.5 h-62.5 mx-auto aspect-square" />
+                    <img src={poster} alt="Lesson poster" className="w-62.5 h-62.5 mx-auto aspect-square rounded-md" />
                 :
                     <img src="/src/assets/icons/lesson-default.svg" alt="Lesson poster" className="w-62.5 h-62.5 mx-auto aspect-square" />
             }

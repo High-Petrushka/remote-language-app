@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link, useParams } from "react-router";
 
 import axios from "axios";
@@ -18,10 +18,16 @@ import { LessonContentLayout } from "../layout/LessonContentLayout";
 import { LessonBodyLayout } from "../layout/LessonBodyLayout";
 import { TestItem } from "../interaction/TestItem";
 import { Button } from "../interaction/Button";
+import { DangerButton } from "../interaction/DangerButton";
 import { TestResult } from "../Typography/TestResult";
 import { PopMessage } from "../interaction/PopMessage";
 import { TestShield } from "../interaction/TestShield";
 import { Like } from "../interaction/Like";
+import { PopActionLayout } from "../layout/PopActionLayout";
+import { TextInput } from "../interaction/TextInput";
+import { InputLayout } from "../layout/InputLayout";
+import { ListLayout } from "../layout/ListLayout";
+import { UserComment } from "../interaction/UserComment";
 
 export function LessonDetail() {
     const token = localStorage.getItem("token");
@@ -32,6 +38,12 @@ export function LessonDetail() {
     const [testRes, setTestRes] = useState(0);
     const [taskCount, setTaskCount] = useState(0); 
     const [liked, setLiked] = useState(false);
+
+    const [comments, setComments] = useState([]);
+    const [commentHidden, setCommentHidden] = useState(true);
+    const [userComment, setUserComment] = useState("");
+    const [commentError, setCommentError] = useState(false);
+    const [added, setAdded] = useState(false);
 
     const [message, setMessage] = useState("");
     const [hidden, setHidden] = useState(true);
@@ -91,6 +103,53 @@ export function LessonDetail() {
         });
     }
 
+    async function getComments() {
+        axios.get(
+            `${Common.url}/lessons/${Number(params["lessonId"])}/comments/`
+        )
+        .then(res => {
+            setComments(res.data);
+        })
+        .catch(err => {
+            console.log(err);
+            setMessage(Common.networkErrorMsg);
+            setHidden(false);
+            setTimeout(() => {
+                setHidden(true);
+            }, 5000);
+        });
+    }
+
+    async function handleComment() {
+        if (userComment) {
+            axios.post(
+                `${Common.url}/lessons/${Number(params["lessonId"])}/comments/`,
+                {"body": userComment},
+                {headers: {"Authorization": token}}
+            )
+            .then(res => {
+                setUserComment("");
+                setCommentHidden(true);
+                document.querySelector("body").style.overflowY = "scroll";
+            })
+            .catch(err => {
+                console.log(err);
+            });
+        } else {
+            setCommentError(true);
+        }
+    }
+
+    async function deleteComment(commentId, lessonId) {
+        axios.delete(
+            `${Common.url}/lessons/${lessonId}/comments/${commentId}/`,
+            {headers: {Authorization: token}},
+        )
+        .then(() => {
+            setAdded(!added);
+        });
+    }
+
     async function handleLike() {
         if (token) {
             if (!liked) {
@@ -118,7 +177,8 @@ export function LessonDetail() {
 
     useEffect(() => {
         getLessonInfo();
-    }, []);
+        getComments();
+    }, [added]);
 
     return (
         <Container>
@@ -136,7 +196,7 @@ export function LessonDetail() {
                         <div>
                             {
                                 lessonInfo["poster"] ?
-                                    <img src={lessonInfo["poster"] ? lessonInfo["poster"] : "/src/assets/icons/lesson-default.svg"} className="w-[min(50vw,400px)] mx-auto" />
+                                    <img src={lessonInfo["poster"] ? lessonInfo["poster"] : "/src/assets/icons/lesson-default.svg"} className="w-[min(50vw,400px)] mx-auto rounded-md" />
                                 :
                                     <img src="/src/assets/icons/lesson-default.svg" className="w-[min(50vw,400px)] mx-auto" />
                             }
@@ -204,8 +264,69 @@ export function LessonDetail() {
                 </LessonTestLayout>)
                 : null
                     }
+                <LessonTestLayout test={true}>
+                    <div className="flex items-center justify-between flex-wrap gap-2">
+                        <Hero level={2}>Comments</Hero>
+                        <div className="w-[min(400px,100%)] ml-auto" style={!token ? {"display": "none"} : {"display": "flex"}}>
+                            <Button handleClick={() => {
+                                window.scrollTo(0, 0);
+                                document.querySelector("body").style.overflow = "hidden";
+                                setCommentHidden(false);
+                            }}>Add Comment</Button>
+                        </div>
+                    </div>
+                    <ListLayout>
+                        {
+                            comments.length != 0 ?
+                                comments.map((comment) => (
+                                    <UserComment
+                                        key={comment["id"]}
+                                        id={comment["id"]}
+                                        userId={comment["author"]["id"]}
+                                        lessonId={comment["lesson"]}
+                                        body={comment["body"]}
+                                        userName={comment["author"]["username"]}
+                                        userAvatar={comment["author"]["avatar"]}
+                                        handleClick={deleteComment}
+                                    />
+                                ))
+                            :
+                                null
+                        }
+                    </ListLayout>
+                </LessonTestLayout>
             </LessonDetailLayout>
             <PopMessage msgText={message} hidden={hidden} />
+            <PopActionLayout hidden={commentHidden}>
+                <div className="bg-neutral-50 rounded-md w-[min(400px,100%)] py-5 px-6 flex flex-col gap-8">
+                    <InputLayout>
+                        <Hero level={6}>Comment</Hero>
+                        <TextInput
+                            id="userComment"
+                            value={userComment}
+                            placeholder={Common.lines.en.placeholder.commentInput}
+                            handleChange={(e) => {
+                                setUserComment(e.target.value)
+                                setCommentError(false);
+                            }}
+                            isErr={commentError}
+                            errMsg={Common.lines.en.error.empty}
+                        />
+                    </InputLayout>
+                    <div className="flex gap-2">
+                        <DangerButton type="button" handleClick={() => {
+                            document.querySelector("body").style.overflowY = "scroll";
+                            setCommentHidden(true);
+                            setUserComment("");
+                            setCommentError(false);
+                        }}>Cancel</DangerButton>
+                        <Button type="button" handleClick={() => {
+                            handleComment();
+                            setAdded(!added);
+                        }}>Send</Button>
+                    </div>
+                </div>
+            </PopActionLayout>
         </Container>
     );
 }
