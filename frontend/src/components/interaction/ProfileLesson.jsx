@@ -11,7 +11,7 @@ export function ProfileLesson({ id, title, imgSrc, type, language, lessonDate })
             <div>
                 {
                     imgSrc ?
-                        <img src={imgSrc} alt="Lesson poster" />
+                        <img src={imgSrc} alt="Lesson poster" className="w-37.5 h-auto max-w-37.5 mx-auto" />
                     :
                         <img src="/src/assets/icons/lesson-default.svg" alt="Lesson poster" className="w-37.5 h-auto max-w-37.5 mx-auto" />
                 }

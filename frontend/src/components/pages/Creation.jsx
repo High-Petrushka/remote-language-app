@@ -72,8 +72,8 @@ export function Creation() {
 
     async function createLesson(url) {
         let formData = new FormData();
-        poster ? formData.append("avatar", document.getElementById("poster").files[0]) : null;
-        test ? formData.append("test[task_set]", JSON.stringify(taskSet)) : null;
+        poster ? formData.append("poster", document.getElementById("poster").files[0]) : null;
+        test ? formData.append("test", JSON.stringify({task_set: taskSet})) : null;
         formData.append("title", title);
         formData.append("description", description);
         formData.append("type", category);
