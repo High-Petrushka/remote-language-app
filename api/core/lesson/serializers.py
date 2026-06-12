@@ -1,3 +1,4 @@
+import json
 from rest_framework import serializers
 
 from core.lesson.models import Lesson, Test, Task, SolvedLesson, Language
@@ -91,6 +92,8 @@ class LessonSerializer(AbstractSerializer):
         validated_data["language"] = language
         if "test" in validated_data:
             test_data = validated_data.pop("test")
+            print(test_data)
+            test_data = json.loads(test_data)
             tasks_data = test_data.pop("task_set")
             lesson = Lesson.objects.create(**validated_data)
             test = Test.objects.create(test_lesson=lesson, **test_data)

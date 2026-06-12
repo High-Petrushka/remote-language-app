@@ -1,5 +1,6 @@
 from math import ceil
 
+from django.contrib.sessions.serializers import JSONSerializer
 from django.db.models import QuerySet
 from django.http import Http404
 from django.shortcuts import get_object_or_404
@@ -38,9 +39,11 @@ class LessonList(APIView, PageNumberPagination):
 
     def post(self, request):
         serializer = self.serializer_class(data=request.data)
-        print(request.data)
         serializer.is_valid(raise_exception=True)
-        serializer.save(owner=request.user, language=request.data.get('language'))
+        if request.data.get("test"):
+            serializer.save(owner=request.user, language=request.data.get('language'), test=request.data.get("test"))
+        else:
+            serializer.save(owner=request.user, language=request.data.get('language'))
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
