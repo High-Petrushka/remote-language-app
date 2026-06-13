@@ -31,8 +31,8 @@ export function Lesson({ id, title, type, language, description, poster, author,
                     <AddInfo title="Author">{ author }</AddInfo>
                 </Link>
                 <Link to={`/lesson/${id}/`} className="group flex items-center">
-                    <span className="text-[16px] font-medium">Study</span>
-                    <img src="/src/assets/icons/arrow-right.svg" className="group-hover:translate-x-2 transition-transform duration-150" />
+                    <span className="text-[16px] text-indigo-500 font-medium">Study</span>
+                    <img src="/src/assets/icons/colored-arrow-right.svg" className="group-hover:translate-x-2 transition-transform duration-150" />
                 </Link>
             </div>
         </div>

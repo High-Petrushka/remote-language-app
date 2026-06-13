@@ -17,7 +17,12 @@ export function UserComment({ id, userId, lessonId, body, userAvatar, userName, 
         <div className="border-b border-zinc-900 pb-4 flex flex-col gap-2">
             <div className="flex items-center justify-between">
                 <div className="flex gap-2 items-center">
-                    <img src="/src/assets/icons/user.svg" alt="User avatar" className="w-[clamp(50px,5vw,80px)] aspect-square" />
+                    {
+                        userAvatar ?
+                            <img src={userAvatar} alt="User avatar" className="w-[clamp(50px,5vw,80px)] aspect-square rounded-full" />
+                        :
+                            <img src="/src/assets/icons/user.svg" alt="User avatar" className="w-[clamp(50px,5vw,80px)] aspect-square rounded-full" />
+                    }
                     <Link to={`/profile/${userId}`}>
                         <Hero level={6}>{userName}</Hero>
                     </Link>

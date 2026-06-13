@@ -28,6 +28,7 @@ import { TextInput } from "../interaction/TextInput";
 import { InputLayout } from "../layout/InputLayout";
 import { ListLayout } from "../layout/ListLayout";
 import { UserComment } from "../interaction/UserComment";
+import { CommentsLayout } from "../layout/CommentsLayout";
 
 export function LessonDetail() {
     const token = localStorage.getItem("token");
@@ -275,7 +276,7 @@ export function LessonDetail() {
                             }}>Add Comment</Button>
                         </div>
                     </div>
-                    <ListLayout>
+                    <CommentsLayout>
                         {
                             comments.length != 0 ?
                                 comments.map((comment) => (
@@ -293,7 +294,7 @@ export function LessonDetail() {
                             :
                                 null
                         }
-                    </ListLayout>
+                    </CommentsLayout>
                 </LessonTestLayout>
             </LessonDetailLayout>
             <PopMessage msgText={message} hidden={hidden} />

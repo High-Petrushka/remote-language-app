@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { ProfileBioInput } from "../interaction/ProfileBioInput";
 import { Container } from "../layout/Container";
@@ -36,24 +36,28 @@ export function Creation() {
     const [message, setMessage] = useState("");
     const [hidden, setHidden] = useState(true);
 
+    const newTaskId = useRef(2);
+
     const makeTest = () => {
         if (!test) {
-            setTaskSet(new Array(2).fill({
+            // setTaskSet(new Array(2).fill({
+            //     question: "",
+            //     answer: "",
+            //     variant_a: "",
+            //     variant_b: "",
+            //     variant_c: "",
+            //     variant_d: "",
+            // }));
+            setTaskSet([{
+                id: 0,
                 question: "",
                 answer: "",
                 variant_a: "",
                 variant_b: "",
                 variant_c: "",
                 variant_d: "",
-            }));
-        } else {
-            setTaskSet([]);
-        }
-    }
-
-    const addTask = () => {
-        if (taskSet.length < 10) {
-            setTaskSet([...taskSet, {
+            }, {
+                id: 1,
                 question: "",
                 answer: "",
                 variant_a: "",
@@ -62,7 +66,24 @@ export function Creation() {
                 variant_d: "",
             }]);
         } else {
-            setMessage("A test can contain no more than 10 tasks.");
+            setTaskSet([]);
+        }
+    }
+
+    const addTask = () => {
+        if (taskSet.length < 10) {
+            setTaskSet([...taskSet, {
+                id: newTaskId.current,
+                question: "",
+                answer: "",
+                variant_a: "",
+                variant_b: "",
+                variant_c: "",
+                variant_d: "",
+            }]);
+            newTaskId.current++;
+        } else {
+            setMessage("Test can contain no more than 10 tasks.");
             setHidden(false);
             setTimeout(() => {
                 setHidden(true);
@@ -70,10 +91,32 @@ export function Creation() {
         }
     }
 
+    const removeTask = (targetId) => {
+        if (taskSet.length < 3) {
+            setMessage(Common.lines.en.error.testMin);
+            setHidden(false);
+            setTimeout(() => {
+                setHidden(true);
+            }, 5000);
+        } else {
+            setTaskSet(taskSet.filter((task) => task["id"] !== targetId));
+            console.log("Done")
+        }
+    }
+
     async function createLesson(url) {
         let formData = new FormData();
         poster ? formData.append("poster", document.getElementById("poster").files[0]) : null;
-        test ? formData.append("test", JSON.stringify({task_set: taskSet})) : null;
+        test ? formData.append("test", JSON.stringify({task_set: taskSet.map(item => {
+            return {
+                question: item["question"],
+                answer: item["answer"],
+                variant_a: item["variant_a"],
+                variant_b: item["variant_b"],
+                variant_c: item["variant_c"],
+                variant_d: item["variant_d"],
+            }
+        })})) : null;
         formData.append("title", title);
         formData.append("description", description);
         formData.append("type", category);
@@ -217,7 +260,16 @@ export function Creation() {
                             taskSet.map((item, index) => (
                                 <TestCreationItemLayout key={index}>
                                     <CreationInputLayout>
-                                        <Hero level={6}>Question</Hero>
+                                        <div className="flex items-center justify-between">
+                                            <Hero level={6}>Question</Hero>
+                                            <img
+                                                src="/src/assets/icons/trash.svg"
+                                                alt="Trash image"
+                                                role="button"
+                                                className="cursor-pointer"
+                                                onClick={() => removeTask(item["id"])}
+                                            />
+                                        </div>
                                         <TestCreationInput 
                                             value={taskSet[index]["question"]}
                                             placeholder="Task question..."

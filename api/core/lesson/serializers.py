@@ -10,6 +10,7 @@ class TaskSerializer(serializers.ModelSerializer):
     class Meta:
         model = Task
         fields = ["id", "question", "answer", "variant_a", "variant_b", "variant_c", "variant_d"]
+        read_only_fields = ["id"]
 
 
 class TestSerializer(serializers.ModelSerializer):
