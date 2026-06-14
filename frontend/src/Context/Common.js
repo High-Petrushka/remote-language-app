@@ -13,7 +13,10 @@ export const Common = {
                 empty: "Please, fill this field!",
                 testMin: "Test has to include at least 2 tasks!",
                 testMax: "Test can contain no more than 10 tasks!",
-            }
+            },
+            question: {
+                lessonDelete: "Are you sure you want to delete this lesson?",
+            },
         },
         gr: {
             title: {},
@@ -25,7 +28,10 @@ export const Common = {
                 empty: "Bitte füllen Sie dieses Feld aus!",
                 testMin: "Der Test muss mindestens 2 Aufgaben enthalten!",
                 testMax: "Der Test kann nicht mehr als 10 Aufgaben enthalten!",
-            }
+            },
+            question: {
+                lessonDelete: "Sind Sie sicher, dass Sie diese Lektion löschen möchten?",
+            },
         },
         fr: {
             title: {},
@@ -37,7 +43,10 @@ export const Common = {
                 empty: "Veuillez remplir ce champ!",
                 testMin: "Le test doit inclure au moins 2 tâches!",
                 testMax: "Le test ne peut pas contenir plus de 10 tâches!",
-            }
+            },
+            question: {
+                lessonDelete: "Êtes-vous sûr de vouloir supprimer cette leçon?",
+            },
         },
         ru: {
             title: {},
@@ -49,7 +58,10 @@ export const Common = {
                 empty: "Пожалуйста, заполните это поле!",
                 testMin: "Тест должен содержать не менее 2 заданий!",
                 testMax: "Тест может содержать не более 10 заданий!",
-            }
+            },
+            question: {
+                lessonDelete: "Вы уверены, что хотите удалить этот урок?",
+            },
         },
     },
 }

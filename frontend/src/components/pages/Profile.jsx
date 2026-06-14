@@ -17,6 +17,10 @@ import { Common } from "../../Context/Common";
 import { Avatar } from "../interaction/Avatar";
 import { ProfileBioInput } from "../interaction/ProfileBioInput";
 import { PopMessage } from "../interaction/PopMessage";
+import { PopActionLayout } from "../layout/PopActionLayout";
+import { DangerButton } from "../interaction/DangerButton";
+import { PopUpBodyLayout } from "../layout/PopUpBodyLayout";
+import { InputLayout } from "../layout/InputLayout";
 
 export function Profile() {
     const navigate = useNavigate();
@@ -35,6 +39,10 @@ export function Profile() {
 
     const[msgHidden, setMsgHidden] = useState(true);
     const [message, setMessage] = useState("");
+
+    const [deleteHidden, setDeleteHidden] = useState(true);
+    const [lessonToDelete, setLessonToDelete] = useState(null);
+    const [deleted, setDeleted] = useState(false);
 
     let nameComp;
     let surnameComp;
@@ -86,6 +94,16 @@ export function Profile() {
     }
 
 
+    async function deleteLesson(lessonId) {
+        axios.delete(
+            `${Common.url}/lessons/${lessonId}/`,
+            {headers: {"Authorization": token}}
+        ).then(() => {
+            setDeleted(!deleted);
+        });
+    }
+
+
     useEffect(() => {
         if (params.userId == "1" && curUser !== 1) {
             navigate("/")
@@ -99,7 +117,7 @@ export function Profile() {
             setNewBio(!response["bio"] ? "" : response["bio"]);
             setNewEmail(response["email"]);
         });
-    }, [params.userId]);
+    }, [params.userId, deleted]);
 
     if (newAvatar) {
         avatarComp = <Avatar imgSrc={URL.createObjectURL(document.getElementById("avatar").files[0])} imgAlt="New user avatar" width="[clamp(250px,40vw,350px)]" />
@@ -200,12 +218,44 @@ export function Profile() {
                                         type={lesson["type"]}
                                         language={lesson["language"]}
                                         lessonDate={lesson["created"]}
+                                        ownerId={lesson["owner_id"]}
+                                        handleDelete={() => {
+                                            setDeleteHidden(false);
+                                            window.scrollTo(0, 0);
+                                            document.querySelector("body").style.overflow = "hidden";
+                                            setLessonToDelete(lesson["id"]);
+                                        }}
                                     />
                                 ))
                         }
                     </div>
                 </ProfileLessonLayout>
             </ProfileLayout>
+            <PopActionLayout hidden={deleteHidden} >
+                <PopUpBodyLayout>
+                    <InputLayout>
+                    <Hero level={6}>Deletion</Hero>
+                    <p className="text-[16px] lg:text-lg">{ Common.lines.en.question.lessonDelete }</p>
+                    </InputLayout>
+                    <div className="flex gap-2">
+                        <Button
+                            type="button"
+                            handleClick={() => {
+                                setDeleteHidden(true);
+                                document.querySelector("body").style.overflowY = "scroll";
+                            }}
+                        >Cancel</Button>
+                        <DangerButton
+                            type="button"
+                            handleClick={() => {
+                                deleteLesson(lessonToDelete);
+                                setDeleteHidden(true);
+                                document.querySelector("body").style.overflowY = "scroll";
+                            }}
+                        >Delete</DangerButton>
+                    </div>
+                </PopUpBodyLayout>
+            </PopActionLayout>
             <PopMessage msgText={message} hidden={msgHidden} />
         </Container>
     );

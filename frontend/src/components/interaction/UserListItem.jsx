@@ -2,7 +2,7 @@ import { Link } from "react-router";
 
 export function UserListItem({ imgSrc, username, email, link }) {
     return (
-        <div className="border-b pb-6 border-zinc-900 last:border-b-0 grid grid-cols-2 px-0 lg:px-4 xl:px-8">
+        <div className="border-b pb-6 border-zinc-900 last:border-b-0 grid grid-cols-[1fr,auto] px-0 lg:px-4 xl:px-8" style={{"gridTemplateColumns": "1fr auto"}}>
             <div className="flex items-center gap-3">
                 {
                     imgSrc ? 

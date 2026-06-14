@@ -37,6 +37,13 @@ def get_avatar_upload_path(instance: MyUser, filename: str) -> str:
 
 
 class MyUser(AbstractBaseUser, AbstractModel, PermissionsMixin):
+    LANGUAGE_CHOICES = {
+        1: "en",
+        2: "gr",
+        3: "fr",
+        4: "ru",
+    }
+
     username = models.CharField(
         max_length=255,
         unique=True,
