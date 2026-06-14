@@ -40,4 +40,4 @@ class MyUserDetailSerializer(AbstractSerializer):
 
     class Meta:
         model = MyUser
-        fields = ["id", "username", "email", "first_name", "last_name", "avatar", "bio", "is_active", "is_admin", "lesson_set", "created", "updated"]
+        fields = ["id", "username", "email", "first_name", "last_name", "avatar", "bio", "language", "is_active", "is_admin", "lesson_set", "created", "updated"]

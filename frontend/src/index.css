@@ -18,6 +18,11 @@
     font-family: "Google Sans";
 }
 
+::selection {
+    background-color: #7C86FF;
+    color: #ffffff;
+}
+
 #root {
     min-height: 100dvh;
     width: 100%;

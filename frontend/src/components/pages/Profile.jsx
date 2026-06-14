@@ -26,6 +26,7 @@ export function Profile() {
     const navigate = useNavigate();
     const curUser = Number(localStorage.getItem("userId"));
     const token = localStorage.getItem("token");
+    const [lang, setLang] = useState(localStorage.getItem("language"));
     const params = useParams();
 
     const [userInfo, setUserInfo] = useState({});
@@ -51,6 +52,9 @@ export function Profile() {
     let avatarInputComp;
     let bioComp;
 
+    if (!lang) {
+        setLang("en");
+    }
 
     async function postProfileChanges(url) {
         let formData = new FormData();
@@ -127,7 +131,7 @@ export function Profile() {
 
     if (Number(params["userId"]) === curUser) {
         nameComp = <ProfileInput
-                title="Name"
+                title={`${Common.lines[lang]["title"]["name"]}`}
                 id="name"
                 placeholder="Your name..."
                 value={newName}
@@ -136,7 +140,7 @@ export function Profile() {
                 errorText="None"
             />;
         surnameComp = <ProfileInput
-                title="Surname"
+                title={`${Common.lines[lang]["title"]["surname"]}`}
                 id="surname"
                 placeholder="Your surname..."
                 value={newSurname}
@@ -171,8 +175,8 @@ export function Profile() {
                     <img src="/src/assets/icons/save.svg" alt="File icon" />
                 </div>)
     } else {
-        nameComp = userInfo["first_name"] ? <ProfileUserInfo title="Name" text={userInfo["first_name"]} /> : <ProfileUserInfo title="Name" text="-" />;
-        surnameComp = userInfo["last_name"] ? <ProfileUserInfo title="Surname" text={userInfo["last_name"]} /> : <ProfileUserInfo title="Surname" text="-" />;
+        nameComp = userInfo["first_name"] ? <ProfileUserInfo title={`${Common.lines[lang]["title"]["name"]}`} text={userInfo["first_name"]} /> : <ProfileUserInfo title={`${Common.lines[lang]["title"]["name"]}`} text="-" />;
+        surnameComp = userInfo["last_name"] ? <ProfileUserInfo title={`${Common.lines[lang]["title"]["surname"]}`} text={userInfo["last_name"]} /> : <ProfileUserInfo title={`${Common.lines[lang]["title"]["surname"]}`} text="-" />;
         emailComp = <ProfileUserInfo title="Email" text={userInfo["email"]} link={`mailto:${userInfo["email"]}`} />;
         bioComp = userInfo["bio"] ? <p className="text-[16px] lg:text-lg">{ userInfo["bio"] }</p> : <p className="text-[16px] lg:text-lg">No bio is set.</p>;
         avatarInputComp = null;
@@ -194,7 +198,9 @@ export function Profile() {
                             { emailComp }
                         </div>
                         <div className="mt-6" style={Number(params["userId"]) == curUser ? {"display": "block"} : {"display": "none"}}>
-                            <Button type="button" handleClick={() => postProfileChanges(`${Common.url}/users/${curUser}/`)}>Save</Button>
+                            <Button type="button" handleClick={() => postProfileChanges(`${Common.url}/users/${curUser}/`)}>
+                                { Common.lines[`${lang}`]["button"]["saveBtn"] }
+                            </Button>
                         </div>
                     </div>
                     <div className="grow flex flex-col gap-3">

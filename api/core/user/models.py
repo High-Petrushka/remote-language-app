@@ -38,10 +38,10 @@ def get_avatar_upload_path(instance: MyUser, filename: str) -> str:
 
 class MyUser(AbstractBaseUser, AbstractModel, PermissionsMixin):
     LANGUAGE_CHOICES = {
-        1: "en",
-        2: "gr",
-        3: "fr",
-        4: "ru",
+        "en": "en",
+        "gr": "gr",
+        "fr": "fr",
+        "ru": "ru",
     }
 
     username = models.CharField(
@@ -67,6 +67,11 @@ class MyUser(AbstractBaseUser, AbstractModel, PermissionsMixin):
         upload_to=get_avatar_upload_path,
         null=True,
         blank=True,
+    )
+    language = models.CharField(
+        max_length=2,
+        choices=LANGUAGE_CHOICES,
+        default="en",
     )
     is_active = models.BooleanField(
         default=True,

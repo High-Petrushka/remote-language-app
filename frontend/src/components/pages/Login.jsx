@@ -54,6 +54,7 @@ export function Login() {
                 let result = await response.json();
                 localStorage.setItem("token", `Token ${result.token}`);
                 localStorage.setItem("userId", result.user_id);
+                localStorage.setItem("language", result.language);
                 navigate("/");
             } else {
                 setAuthErrorFlag(true);
