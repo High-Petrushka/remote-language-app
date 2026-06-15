@@ -7,13 +7,16 @@ export const Common = {
             title: {
                 name: "Name",
                 surname: "Surname",
-                password: "Password"
+                password: "Password",
             },
             placeholder: {
                 commentInput: "Your comment...",
             },
             button: {
                 saveBtn: "Save",
+                signIn: "Sign in",
+                singUp: "Sign up",
+                createLesson: "Create lesson",
             },
             error: {
                 empty: "Please, fill this field!",
@@ -38,19 +41,26 @@ export const Common = {
                 logout: "Logout",
                 login: "Login",
                 registration: "Registration",
+            },
+            home: {
+                title: "Expand your horizons in terms of language learning",
+                titleText: "Make it simple to learn foreign languages with our platform, which offers wide range of different lessons, practical tests, regular content updates and social communication with outher learners.",
             }
         },
         gr: {
             title: {
                 name: "Name",
                 surname: "Familienname",
-                password: "Passwort"
+                password: "Passwort",
             },
             placeholder: {
                 commentInput: "Ihr Kommentar...",
             },
             button: {
                 saveBtn: "Speichern",
+                signIn: "Anmelden",
+                singUp: "Registrierung",
+                createLesson: "Lektion erstellen",
             },
             error: {
                 empty: "Bitte füllen Sie dieses Feld aus!",
@@ -75,19 +85,26 @@ export const Common = {
                 logout: "Abmelden",
                 login: "Login",
                 registration: "Registrierung",
+            },
+            home: {
+                title: "Erweitern Sie Ihren Horizont in Bezug auf das Sprachenlernen",
+                titleText: "Simplifiez l'apprentissage des langues étrangères avec notre plate-forme qui offre une grande variété de leçons, des tests et la communication avec d'autres utilisateurs.",
             }
         },
         fr: {
             title: {
                 name: "Nom",
                 surname: "Nom de Famille",
-                password: "Mot de Passe"
+                password: "Mot de Passe",
             },
             placeholder: {
                 commentInput: "Votre commentaire...",
             },
             button: {
                 saveBtn: "Sauvegarder",
+                signIn: "Se connecter",
+                singUp: "S'inscrire",
+                createLesson: "Créer une leçon",
             },
             error: {
                 empty: "Veuillez remplir ce champ!",
@@ -112,19 +129,26 @@ export const Common = {
                 logout: "Déconnexion",
                 login: "Connexion",
                 registration: "Inscription",
+            },
+            home: {
+                title: "Élargir les horizons en termes d'apprentissage des langues",
+                titleText: "Simplifiez l'apprentissage des langues étrangères avec notre plateforme, qui propose un large éventail de leçons différentes, des tests pratiques une communication sociale avec les apprenants extérieurs.",
             }
         },
         ru: {
             title: {
                 name: "Имя",
                 surname: "Фамилия",
-                password: "Пароль"
+                password: "Пароль",
             },
             placeholder: {
                 commentInput: "Ваш комментарий..."
             },
             button: {
                 saveBtn: "Сохранить",
+                signIn: "Вход",
+                singUp: "Регистрация",
+                createLesson: "Создать урок"
             },
             error: {
                 empty: "Пожалуйста, заполните это поле!",
@@ -149,7 +173,11 @@ export const Common = {
                 logout: "Выход",
                 login: "Вход",
                 registration: "Регистрация",
-            }
+            },
+            home: {
+                title: "Расширьте своё представление об изучении языков",
+                titleText: "Упростите изучение иностранных языков с помощью нашей платформы, что предлагает широкий спектр уроков, тестов и общение с другими пользователями.",
+                },
         },
     },
 }
