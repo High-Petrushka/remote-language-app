@@ -8,6 +8,7 @@ export const Common = {
                 name: "Name",
                 surname: "Surname",
                 password: "Password",
+                mainFeatures: "Main Features",
             },
             placeholder: {
                 commentInput: "Your comment...",
@@ -17,6 +18,8 @@ export const Common = {
                 signIn: "Sign in",
                 singUp: "Sign up",
                 createLesson: "Create lesson",
+                seeLessons: "See lessons",
+                findTests: "Find tests",
             },
             error: {
                 empty: "Please, fill this field!",
@@ -45,6 +48,20 @@ export const Common = {
             home: {
                 title: "Expand your horizons in terms of language learning",
                 titleText: "Make it simple to learn foreign languages with our platform, which offers wide range of different lessons, practical tests, regular content updates and social communication with outher learners.",
+                features: {
+                    lessons: {
+                        title: "Many lessons",
+                        text: "We suggest many lessons of different languages on our platform. We believe that you'll definitely find something for yourself.",
+                    },
+                    tests: {
+                        title: "Practical tests",
+                        text: "Many lessons offers practical tests in addition to their contents. So you can start using your theoretical knowledge immediately.",
+                    },
+                    creation: {
+                        title: "Ease of creation",
+                        text: "Create new content easily and painless with our predefined layout. It'll give you a lot possibilities to express your creativity.",
+                    },
+                }
             }
         },
         gr: {
@@ -52,6 +69,7 @@ export const Common = {
                 name: "Name",
                 surname: "Familienname",
                 password: "Passwort",
+                mainFeatures: "Hauptmerkmal",
             },
             placeholder: {
                 commentInput: "Ihr Kommentar...",
@@ -61,6 +79,8 @@ export const Common = {
                 signIn: "Anmelden",
                 singUp: "Registrierung",
                 createLesson: "Lektion erstellen",
+                seeLessons: "Lektionen ansehen",
+                findTests: "Tests finden",
             },
             error: {
                 empty: "Bitte füllen Sie dieses Feld aus!",
@@ -88,7 +108,21 @@ export const Common = {
             },
             home: {
                 title: "Erweitern Sie Ihren Horizont in Bezug auf das Sprachenlernen",
-                titleText: "Simplifiez l'apprentissage des langues étrangères avec notre plate-forme qui offre une grande variété de leçons, des tests et la communication avec d'autres utilisateurs.",
+                titleText: "Erleichtern Sie das Erlernen von Fremdsprachen mit unserer Plattform, die eine breite Palette verschiedener Lektionen, praktischer Tests und sozialer Kommunikation mit anderen Lernenden bietet.",
+                features: {
+                    lessons: {
+                        title: "Viele Lektionen",
+                        text: "Wir schlagen auf unserer Plattform viele Lektionen in verschiedenen Sprachen vor. Wir glauben, dass Sie auf jeden Fall etwas für sich finden werden.",
+                    },
+                    tests: {
+                        title: "Praxistest",
+                        text: "Viele Lektionen bieten zusätzlich zu ihren Inhalten praktische Tests an. So können Sie Ihr theoretisches Wissen sofort anwenden.",
+                    },
+                    creation: {
+                        title: "Leichtigkeit der Schöpfung",
+                        text: "Erstellen Sie neue Inhalte einfach und schmerzlos mit unserem vordefinierten Layout. Es gibt Ihnen viele Möglichkeiten, Ihre Kreativität auszudrücken.",
+                    },
+                }
             }
         },
         fr: {
@@ -96,6 +130,7 @@ export const Common = {
                 name: "Nom",
                 surname: "Nom de Famille",
                 password: "Mot de Passe",
+                mainFeatures: "Caractéristiques Principales",
             },
             placeholder: {
                 commentInput: "Votre commentaire...",
@@ -105,6 +140,8 @@ export const Common = {
                 signIn: "Se connecter",
                 singUp: "S'inscrire",
                 createLesson: "Créer une leçon",
+                seeLessons: "Voir les leçons",
+                findTests: "Trouver des tests",
             },
             error: {
                 empty: "Veuillez remplir ce champ!",
@@ -133,6 +170,20 @@ export const Common = {
             home: {
                 title: "Élargir les horizons en termes d'apprentissage des langues",
                 titleText: "Simplifiez l'apprentissage des langues étrangères avec notre plateforme, qui propose un large éventail de leçons différentes, des tests pratiques une communication sociale avec les apprenants extérieurs.",
+                features: {
+                    lessons: {
+                        title: "De nombreuses leçons",
+                        text: "Nous suggérons de nombreuses leçons de différentes langues sur notre plateforme. Vous trouverez certainement quelque chose pour vous-même.",
+                    },
+                    tests: {
+                        title: "Tests pratiques",
+                        text: "Les leçons proposent des tests pratiques en plus de leur contenu. Vous pouvez donc commencer à utiliser vos nouvelles connaissances immédiatement.",
+                    },
+                    creation: {
+                        title: "Facilité de création",
+                        text: "Créez de nouveaux contenus facilement et sans douleur avec notre mise en page prédéfinie. Cela vous laissera beaucoup de possibilités d'exprimer votre créativité.",
+                    },
+                }
             }
         },
         ru: {
@@ -140,6 +191,7 @@ export const Common = {
                 name: "Имя",
                 surname: "Фамилия",
                 password: "Пароль",
+                mainFeatures: "Основные преимущества",
             },
             placeholder: {
                 commentInput: "Ваш комментарий..."
@@ -148,7 +200,9 @@ export const Common = {
                 saveBtn: "Сохранить",
                 signIn: "Вход",
                 singUp: "Регистрация",
-                createLesson: "Создать урок"
+                createLesson: "Создать урок",
+                seeLessons: "Все уроки",
+                findTests: "Найти тест",
             },
             error: {
                 empty: "Пожалуйста, заполните это поле!",
@@ -177,6 +231,20 @@ export const Common = {
             home: {
                 title: "Расширьте своё представление об изучении языков",
                 titleText: "Упростите изучение иностранных языков с помощью нашей платформы, что предлагает широкий спектр уроков, тестов и общение с другими пользователями.",
+                features: {
+                    lessons: {
+                        title: "Множество уроков",
+                        text: "На нашей платформе мы предлагаем множество уроков по изучению различных языков. Здесь вы непременно найдете что-нибудь интересное.",
+                    },
+                    tests: {
+                        title: "Практические тесты",
+                        text: "Многие уроки дополняются практическими тестами. Таким образом, вы можете начать использовать свои теоретические знания немедленно.",
+                    },
+                    creation: {
+                        title: "Простота создания",
+                        text: "Создавайте новый контент легко и беспрепятственно с помощью нашего готового шаблона. Это даст вам возможность проявить свой творческий потенциал.",
+                    },
+                }
                 },
         },
     },

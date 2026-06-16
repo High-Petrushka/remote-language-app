@@ -162,7 +162,7 @@ export function Creation() {
 
     useEffect(() => {
         if (!token) {
-            navigate("/");
+            navigate("/login");
         }
     }, []);
 

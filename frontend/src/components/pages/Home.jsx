@@ -10,10 +10,13 @@ import { HomeLesson } from "../interaction/HomeLesson";
 import { HomeTitleLayout } from "../layout/HomeTitleLayout";
 import { Button } from "../interaction/Button";
 import { useNavigate } from "react-router";
+import { HomeFeaturesLayout } from "../layout/HomeFeaturesLayout";
+import { HomeFeature } from "../interaction/HomeFeature";
 
 export function Home() {
   const [homeInfo, setHomeInfo] = useState({});
   const token = localStorage.getItem("token");
+  const userId = localStorage.getItem("userId");
   let navigate = useNavigate();
   let lang = localStorage.getItem("language");
 
@@ -37,7 +40,9 @@ export function Home() {
     function handleScroll() {
       let sun = document.getElementById("homeSun");
       let scrollEl = document.getElementById("root");
-      sun.style.transform = `rotate(-${scrollEl.scrollTop/10}deg)`
+      if (sun) {
+        sun.style.transform = `rotate(-${scrollEl.scrollTop/10}deg)`;
+      }
     }
 
     window.addEventListener("scroll", handleScroll, true);
@@ -54,13 +59,13 @@ export function Home() {
               <h2 className="text-[clamp(28px,5vw,56px)] leading-[1.2]">{ Common.lines[lang]["home"]["title"] }</h2>
             </div>
             <div className="flex flex-col gap-4">
-              <p className="text-lg text-zinc-900/70">{ Common.lines[lang]["home"]["titleText"] }</p>
+              <p className="text-lg text-zinc-900/80">{ Common.lines[lang]["home"]["titleText"] }</p>
               <div className="self-start">
                 {
                   !token ?
                     <Button type="button" handleClick={() => navigate("/login")}>{ Common.lines[lang]["button"]["signIn"] }</Button>
                   :
-                    <Button type="button" handleClick={() => navigate("/creation")}>{ Common.lines[lang]["button"]["createLesson"] }</Button>
+                    <Button type="button" handleClick={() => navigate(`/profile/${userId}`)}>{ Common.lines[lang]["menu"]["profile"] }</Button>
                 }
               </div>
             </div>
@@ -73,6 +78,34 @@ export function Home() {
             className="absolute w-[clamp(150px,32vw,450px)] bottom-[-25%] md:hidden xl:block xl:bottom-[-50%] right-0"
           />
         </HomeTitleLayout>
+        <HomeFeaturesLayout>
+          <div className="pb-1 border-b border-zinc-900">
+            <Hero level={6}>{ Common.lines[lang]["title"]["mainFeatures"] }</Hero>
+          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <HomeFeature
+              title={Common.lines[lang]["home"]["features"]["lessons"]["title"]}
+              text={Common.lines[lang]["home"]["features"]["lessons"]["text"]}
+              imgSrc="/src/assets/features/lesson.svg"
+              btnText={ Common.lines[lang]["button"]["seeLessons"] }
+              handleBtn={() => navigate("/lessons")}
+            />
+            <HomeFeature
+              title={Common.lines[lang]["home"]["features"]["tests"]["title"]}
+              text={Common.lines[lang]["home"]["features"]["tests"]["text"]}
+              imgSrc="/src/assets/features/test.svg"
+              btnText={Common.lines[lang]["button"]["findTests"]}
+              handleBtn={() => navigate("/lessons")}
+            />
+            <HomeFeature
+              title={Common.lines[lang]["home"]["features"]["creation"]["title"]}
+              text={Common.lines[lang]["home"]["features"]["creation"]["text"]}
+              imgSrc="/src/assets/features/creation.svg"
+              btnText={ Common.lines[lang]["button"]["createLesson"] }
+              handleBtn={() => navigate("/creation")}
+            />
+          </div>
+        </HomeFeaturesLayout>
       </HomeLayout>
       <div className="h-full"></div>
     </Container>
