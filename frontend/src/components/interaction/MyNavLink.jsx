@@ -19,7 +19,7 @@ export function MyNavLink({ children, path, iconSrc, inverse }) {
                 }
             }
         >
-            <img src={iconSrc} />
+            <img src={iconSrc} className="w-6" />
             { children }
         </NavLink>
     );

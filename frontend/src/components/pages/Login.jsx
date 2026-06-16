@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { AuthLayout } from "../layout/AuthLayout";
 import { Container } from "../layout/Container";
@@ -17,6 +17,7 @@ export function Login() {
     const [authErrorFlag, setAuthErrorFlag] = useState("");
 
     const navigate = useNavigate();
+    const token = localStorage.getItem("token");
 
     const handleLogin = (e) => {
         setLogin(e.target.value);
@@ -63,6 +64,12 @@ export function Login() {
             console.log(err);
         }
     }
+
+    useEffect(() => {
+        if (token) {
+            navigate("/");
+        }
+    })
 
     return (
         <Container>

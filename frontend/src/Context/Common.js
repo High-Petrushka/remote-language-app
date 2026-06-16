@@ -16,7 +16,7 @@ export const Common = {
             button: {
                 saveBtn: "Save",
                 signIn: "Sign in",
-                singUp: "Sign up",
+                signUp: "Sign up",
                 createLesson: "Create lesson",
                 seeLessons: "See lessons",
                 findTests: "Find tests",
@@ -61,7 +61,11 @@ export const Common = {
                         title: "Ease of creation",
                         text: "Create new content easily and painless with our predefined layout. It'll give you a lot possibilities to express your creativity.",
                     },
-                }
+                },
+                callToAction: {
+                    title: "Start learning now",
+                    text: "Quickly design your own lessons, find and solve somebody's else, share your opinion in the comment section, and express how much you've liked creator's content by liking it.\nDon't wait for a tomorrow, start now!",
+                },
             }
         },
         gr: {
@@ -77,7 +81,7 @@ export const Common = {
             button: {
                 saveBtn: "Speichern",
                 signIn: "Anmelden",
-                singUp: "Registrierung",
+                signUp: "Registrierung",
                 createLesson: "Lektion erstellen",
                 seeLessons: "Lektionen ansehen",
                 findTests: "Tests finden",
@@ -122,8 +126,12 @@ export const Common = {
                         title: "Leichtigkeit der Schöpfung",
                         text: "Erstellen Sie neue Inhalte einfach und schmerzlos mit unserem vordefinierten Layout. Es gibt Ihnen viele Möglichkeiten, Ihre Kreativität auszudrücken.",
                     },
-                }
-            }
+                },
+                callToAction: {
+                    title: "Jetzt starten",
+                    text: "Entwerfen Sie schnell Ihre eigenen Lektionen, finden und lösen Sie die von jemand anderem, teilen Sie Ihre Meinung im Kommentarbereich mit und drücken Sie aus, wie sehr Ihnen der Inhalt des Erstellers gefallen hat. Warte nicht auf ein Morgen, fang jetzt an!",
+                },
+            },
         },
         fr: {
             title: {
@@ -138,7 +146,7 @@ export const Common = {
             button: {
                 saveBtn: "Sauvegarder",
                 signIn: "Se connecter",
-                singUp: "S'inscrire",
+                signUp: "S'inscrire",
                 createLesson: "Créer une leçon",
                 seeLessons: "Voir les leçons",
                 findTests: "Trouver des tests",
@@ -183,7 +191,11 @@ export const Common = {
                         title: "Facilité de création",
                         text: "Créez de nouveaux contenus facilement et sans douleur avec notre mise en page prédéfinie. Cela vous laissera beaucoup de possibilités d'exprimer votre créativité.",
                     },
-                }
+                },
+                callToAction: {
+                    title: "Commencez ici",
+                    text: "Concevez rapidement vos propres leçons, trouvez et résolvez celles de quelqu'un d'autre, partagez votre opinion dans la section des commentaires et exprimez à quel point vous avez aimé le contenu du créateur. N'attendez pas demain, commencez maintenant!",
+                },
             }
         },
         ru: {
@@ -199,7 +211,7 @@ export const Common = {
             button: {
                 saveBtn: "Сохранить",
                 signIn: "Вход",
-                singUp: "Регистрация",
+                signUp: "Регистрация",
                 createLesson: "Создать урок",
                 seeLessons: "Все уроки",
                 findTests: "Найти тест",
@@ -244,7 +256,11 @@ export const Common = {
                         title: "Простота создания",
                         text: "Создавайте новый контент легко и беспрепятственно с помощью нашего готового шаблона. Это даст вам возможность проявить свой творческий потенциал.",
                     },
-                }
+                },
+                callToAction: {
+                    title: "Начни уже сейчас",
+                    text: "Быстро создавайте собственные уроки, находите и решайте чужие, делитесь своим мнением в разделе комментариев и выражайте, насколько вам понравился контент автора. Не ждите завтрашнего дня, начинайте прямо сейчас!",
+                },
                 },
         },
     },

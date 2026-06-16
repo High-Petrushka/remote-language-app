@@ -12,6 +12,8 @@ import { Button } from "../interaction/Button";
 import { useNavigate } from "react-router";
 import { HomeFeaturesLayout } from "../layout/HomeFeaturesLayout";
 import { HomeFeature } from "../interaction/HomeFeature";
+import { HomeCallToActionLayout } from "../layout/HomeCallToActionLayout";
+import { OutlineBlackButton } from "../interaction/OutlineBlackButton";
 
 export function Home() {
   const [homeInfo, setHomeInfo] = useState({});
@@ -39,9 +41,8 @@ export function Home() {
     
     function handleScroll() {
       let sun = document.getElementById("homeSun");
-      let scrollEl = document.getElementById("root");
       if (sun) {
-        sun.style.transform = `rotate(-${scrollEl.scrollTop/10}deg)`;
+        sun.style.transform = `rotate(-${window.scrollY/10}deg)`;
       }
     }
 
@@ -106,8 +107,30 @@ export function Home() {
             />
           </div>
         </HomeFeaturesLayout>
+        <HomeCallToActionLayout>
+          <img src="/src/assets/icons/globe.svg" alt="Globe icon" className="w-16" />
+          <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-1 text-center">
+              <Hero level={4}>{ Common.lines[lang]["home"]["callToAction"]["title"] }</Hero>
+              <p className="text-lg text-zinc-900/80">{ Common.lines[lang]["home"]["callToAction"]["text"] }</p>
+            </div>
+            <div className="flex justify-center gap-2">
+              {
+                !token ?
+                  <Button type="button" handleClick={() => navigate("/login")}>{ Common.lines[lang]["button"]["signIn"] }</Button>
+                :
+                  null
+              }
+              {
+                !token ?
+                  <OutlineBlackButton type="button" handleClick={() => navigate("/registration")}>{ Common.lines[lang]["button"]["signUp"] }</OutlineBlackButton>
+                :
+                  null
+              }
+            </div>
+          </div>
+        </HomeCallToActionLayout>
       </HomeLayout>
-      <div className="h-full"></div>
     </Container>
   );
 }

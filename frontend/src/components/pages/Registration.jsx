@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 
 import { Button } from "../interaction/Button";
@@ -25,6 +25,7 @@ export function Registration() {
     const [firstNameErrorFlag, setFirstNameErrorFlag] = useState(false);
 
     const navigate = useNavigate();
+    const token = localStorage.getItem("token");
 
     const handleLogin = (e) => {
         setLogin(e.target.value);
@@ -99,6 +100,12 @@ export function Registration() {
             console.log(err);
         }
     }
+
+    useEffect(() => {
+        if (token) {
+            navigate("/");
+        }
+    });
 
     return (
         <Container>
