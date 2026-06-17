@@ -27,7 +27,7 @@ from core.pagination import CustomPagination
 
 
 class MyUserList(generics.ListAPIView, CustomPagination):
-    queryset = MyUser.objects.exclude(pk=1)
+    queryset = MyUser.objects.exclude(pk=1).order_by("-pk")
     serializer_class = MyUserSerializer
     permission_classes = (AllowAny,)
 

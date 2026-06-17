@@ -25,7 +25,7 @@ class CommentList(APIView):
 
     def get(self, request, lesson_pk):
         lesson = self.get_object(lesson_pk)
-        comments = Comment.objects.all().filter(lesson=lesson.pk)
+        comments = Comment.objects.all().filter(lesson=lesson.pk).order_by("-pk")
         serializer = self.serializer_class(comments, many=True, context={"request": request})
         return Response(serializer.data)
 

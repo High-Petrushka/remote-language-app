@@ -9,9 +9,11 @@ export const Common = {
                 surname: "Surname",
                 password: "Password",
                 mainFeatures: "Main Features",
+                feedbackPopUp: "Feedback",
             },
             placeholder: {
                 commentInput: "Your comment...",
+                feedbackInput: "Your feedback..."
             },
             button: {
                 saveBtn: "Save",
@@ -20,6 +22,9 @@ export const Common = {
                 createLesson: "Create lesson",
                 seeLessons: "See lessons",
                 findTests: "Find tests",
+                feedbackBtn: "Leave feedback",
+                cancelBtn: "Cancel",
+                sendBtn: "Save",
             },
             error: {
                 empty: "Please, fill this field!",
@@ -66,6 +71,10 @@ export const Common = {
                     title: "Start learning now",
                     text: "Quickly design your own lessons, find and solve somebody's else, share your opinion in the comment section, and express how much you've liked creator's content by liking it.\nDon't wait for a tomorrow, start now!",
                 },
+                feedback: {
+                    title: "User's feedback",
+                    question: "Have an opinion on our platform?",
+                },
             }
         },
         gr: {
@@ -74,17 +83,22 @@ export const Common = {
                 surname: "Familienname",
                 password: "Passwort",
                 mainFeatures: "Hauptmerkmal",
+                feedbackPopUp: "Feedback",
             },
             placeholder: {
                 commentInput: "Ihr Kommentar...",
+                feedbackInput: "Ihr Feedback...",
             },
             button: {
                 saveBtn: "Speichern",
                 signIn: "Anmelden",
                 signUp: "Registrierung",
                 createLesson: "Lektion erstellen",
-                seeLessons: "Lektionen ansehen",
+                seeLessons: "Feedback hinterlassen",
                 findTests: "Tests finden",
+                feedbackBtn: "Laisser des commentaires",
+                cancelBtn: "Stornieren",
+                sendBtn: "Speichern",
             },
             error: {
                 empty: "Bitte füllen Sie dieses Feld aus!",
@@ -131,6 +145,10 @@ export const Common = {
                     title: "Jetzt starten",
                     text: "Entwerfen Sie schnell Ihre eigenen Lektionen, finden und lösen Sie die von jemand anderem, teilen Sie Ihre Meinung im Kommentarbereich mit und drücken Sie aus, wie sehr Ihnen der Inhalt des Erstellers gefallen hat. Warte nicht auf ein Morgen, fang jetzt an!",
                 },
+                feedback: {
+                    title: "Benutzer-Feedback",
+                    question: "Haben Sie eine Meinung zu unserer Plattform?",
+                },
             },
         },
         fr: {
@@ -139,9 +157,11 @@ export const Common = {
                 surname: "Nom de Famille",
                 password: "Mot de Passe",
                 mainFeatures: "Caractéristiques Principales",
+                feedbackPopUp: "Commentaires",
             },
             placeholder: {
                 commentInput: "Votre commentaire...",
+                feedbackInput: "Vos commentaires...",
             },
             button: {
                 saveBtn: "Sauvegarder",
@@ -150,6 +170,9 @@ export const Common = {
                 createLesson: "Créer une leçon",
                 seeLessons: "Voir les leçons",
                 findTests: "Trouver des tests",
+                feedbackBtn: "Laisser des commentaires",
+                cancelBtn: "Annuler",
+                sendBtn: "Sauvegarder",
             },
             error: {
                 empty: "Veuillez remplir ce champ!",
@@ -196,6 +219,10 @@ export const Common = {
                     title: "Commencez ici",
                     text: "Concevez rapidement vos propres leçons, trouvez et résolvez celles de quelqu'un d'autre, partagez votre opinion dans la section des commentaires et exprimez à quel point vous avez aimé le contenu du créateur. N'attendez pas demain, commencez maintenant!",
                 },
+                feedback: {
+                    title: "Commentaires de l'utilisateur",
+                    question: "Vous avez un avis sur notre plateforme?",
+                },
             }
         },
         ru: {
@@ -204,9 +231,11 @@ export const Common = {
                 surname: "Фамилия",
                 password: "Пароль",
                 mainFeatures: "Основные преимущества",
+                feedbackPopUp: "Обратная связь",
             },
             placeholder: {
-                commentInput: "Ваш комментарий..."
+                commentInput: "Ваш комментарий...",
+                feedbackInput: "Ваш отзыв...",
             },
             button: {
                 saveBtn: "Сохранить",
@@ -215,6 +244,9 @@ export const Common = {
                 createLesson: "Создать урок",
                 seeLessons: "Все уроки",
                 findTests: "Найти тест",
+                feedbackBtn: "Оставить отзыв",
+                cancelBtn: "Отмена",
+                sendBtn: "Отправить",
             },
             error: {
                 empty: "Пожалуйста, заполните это поле!",
@@ -261,7 +293,11 @@ export const Common = {
                     title: "Начни уже сейчас",
                     text: "Быстро создавайте собственные уроки, находите и решайте чужие, делитесь своим мнением в разделе комментариев и выражайте, насколько вам понравился контент автора. Не ждите завтрашнего дня, начинайте прямо сейчас!",
                 },
+                feedback: {
+                    title: "Отзывы пользователей",
+                    question: "Имеете мнение о нашей платформе?",
                 },
+            },
         },
     },
 }

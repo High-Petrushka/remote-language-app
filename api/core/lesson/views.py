@@ -22,7 +22,7 @@ class LessonList(APIView, PageNumberPagination):
     permission_classes = (IsAuthenticatedOrReadOnly,)
 
     def get(self, request):
-        lessons = Lesson.objects.all()
+        lessons = Lesson.objects.all().order_by("-pk")
 
         category = request.GET.get("category")
         language = request.GET.get("language")

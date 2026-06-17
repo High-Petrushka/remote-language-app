@@ -11,11 +11,22 @@ import { Lesson } from "../interaction/Lesson";
 import { LessonsPageLayout } from "../layout/LessonsPageLayout";
 import { FilterTitle } from "../Typography/FilterTitle";
 import { FilterBtn } from "../interaction/FilterBtn";
+import { PopActionLayout } from "../layout/PopActionLayout";
+import { Button } from "../interaction/Button";
+import { DangerButton } from "../interaction/DangerButton";
+import { PopUpBodyLayout } from "../layout/PopUpBodyLayout";
+import { InputLayout } from "../layout/InputLayout";
+import { Hero } from "../Typography/Hero";
 
 export function Lessons() {
     const [lessons, setLessons] = useState([]);
     const [category, setCategory] = useState("");
     const [language, setLanguage] = useState("");
+    const [deleteHidden, setDeleteHidden] = useState(true);
+    const [lessonToDelete, setLessonToDelete] = useState(null);
+    const [deleted, setDeleted] = useState(false);
+
+    const token = localStorage.getItem("token");
 
     const getLanguage = (languageId) => {
         if (language === languageId) {
@@ -25,6 +36,23 @@ export function Lessons() {
         }
     };
 
+    const deleteLesson = (lessonId) => {
+        console.log(lessonId)
+        axios.delete(
+            `${Common.url}/lessons/${lessonId}/`,
+            {headers: {"Authorization": token}},
+        )
+        .then(() => {
+            setDeleteHidden(true);
+            setLessonToDelete(null);
+            setDeleted(!deleted);
+            document.querySelector("body").style.overflowY = "scroll";
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+    }
+
     useEffect(() => {
         axios.get(`${Common.url}/lessons/?category=${category}&language=${language}`)
         .then((response) => {
@@ -33,7 +61,7 @@ export function Lessons() {
         .catch((err) => {
             console.log(err);
         });
-    }, [category, language]);
+    }, [category, language, deleted]);
 
     return (
         <Container>
@@ -73,11 +101,41 @@ export function Lessons() {
                                 author={lesson.owner}
                                 created={lesson.created}
                                 owner_id={lesson.owner_id}
+                                handleDelete={() => {
+                                    window.scrollTo(0, 0);
+                                    document.querySelector("body").style.overflow = "hidden";
+                                    setDeleteHidden(false);
+                                    setLessonToDelete(lesson.id);
+                                }}
                             />
                         ))
                     }
                 </LessonsLayout>
             </LessonsPageLayout>
+            <PopActionLayout hidden={deleteHidden} >
+                <PopUpBodyLayout>
+                    <InputLayout>
+                    <Hero level={6}>Deletion</Hero>
+                    <p className="text-[16px] lg:text-lg">{ Common.lines.en.question.lessonDelete }</p>
+                    </InputLayout>
+                    <div className="flex gap-2">
+                        <Button
+                            type="button"
+                            handleClick={() => {
+                                setDeleteHidden(true);
+                                setLessonToDelete(null);
+                                document.querySelector("body").style.overflowY = "scroll";
+                            }}
+                        >Cancel</Button>
+                        <DangerButton
+                            type="button"
+                            handleClick={() => {
+                                deleteLesson(lessonToDelete);
+                            }}
+                        >Delete</DangerButton>
+                    </div>
+                </PopUpBodyLayout>
+            </PopActionLayout>
         </Container>
     );
 }

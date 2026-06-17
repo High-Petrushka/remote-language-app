@@ -6,7 +6,8 @@ import { AddInfo } from "../Typography/AddInfo";
 
 import { getLessonDate } from "../../Context/getLessonDate";
 
-export function Lesson({ id, title, type, language, description, poster, author, created, owner_id }) {
+export function Lesson({ id, title, type, language, description, poster, author, created, owner_id, handleDelete }) {
+    const userId = localStorage.getItem("userId");
     return (
         <div className="flex flex-col gap-8 p-7 border-l border-b border-r first:border-t md:border-r-0 md:last:border-r md:nth-[2]:border-t xl:nth-[3]:border-t xl:nth-[3n]:border-r xl:last:border-r border-zinc-900">
             <div className="flex items-center justify-between">
@@ -30,10 +31,22 @@ export function Lesson({ id, title, type, language, description, poster, author,
                 <Link to={`/profile/${owner_id}/`}>
                     <AddInfo title="Author">{ author }</AddInfo>
                 </Link>
-                <Link to={`/lesson/${id}/`} className="group flex items-center">
-                    <span className="text-[16px] text-indigo-500 font-medium">Study</span>
-                    <img src="/src/assets/icons/colored-arrow-right.svg" className="group-hover:translate-x-2 transition-transform duration-150" />
-                </Link>
+                <div className="flex gap-4">
+                    {
+                        userId && userId == 1 ?
+                            <span
+                                role="button"
+                                className="text-[16px] text-red-500 font-medium cursor-pointer"
+                                onClick={() => handleDelete(id)}
+                            >Delete</span>
+                        :
+                            null
+                    }
+                    <Link to={`/lesson/${id}/`} className="group flex items-center">
+                        <span className="text-[16px] text-indigo-500 font-medium">Study</span>
+                        <img src="/src/assets/icons/colored-arrow-right.svg" className="group-hover:translate-x-2 transition-transform duration-150" />
+                    </Link>
+                </div>
             </div>
         </div>
     );

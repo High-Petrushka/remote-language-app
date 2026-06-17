@@ -12,11 +12,11 @@ class FeedbackAPIView(APIView):
 
     def get(self, request):
         feedback = Feedback.objects.all()
-        serializer = self.serializer_class(feedback, many=True)
+        serializer = self.serializer_class(feedback, context={'request': request}, many=True)
         return Response(serializer.data)
 
     def post(self, request):
-        serializer = self.serializer_class(data=request.data)
+        serializer = self.serializer_class(data=request.data, context={'request': request})
         serializer.is_valid(raise_exception=True)
         serializer.save(user=request.user)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
