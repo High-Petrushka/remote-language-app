@@ -10,6 +10,11 @@ export const Common = {
                 password: "Password",
                 mainFeatures: "Main Features",
                 feedbackPopUp: "Feedback",
+                lessons: "LESSONS",
+                categories: "CATEGORIES",
+                languages: "LANGUAGES",
+                deleteion: "Deletion",
+                author: "Author",
             },
             placeholder: {
                 commentInput: "Your comment...",
@@ -25,6 +30,8 @@ export const Common = {
                 feedbackBtn: "Leave feedback",
                 cancelBtn: "Cancel",
                 sendBtn: "Save",
+                deleteBtn: "Delete",
+                studyBtn: "Study",
             },
             error: {
                 empty: "Please, fill this field!",
@@ -39,6 +46,13 @@ export const Common = {
                 "gr": "German",
                 "fr": "French",
                 "ru": "Russian",
+                "ch": "Chinese",
+                "jp": "Japanese",
+            },
+            categories: {
+                reading: "reading",
+                grammar: "grammar",
+                speaking: "speaking",
             },
             menu: {
                 home: "Home",
@@ -84,6 +98,11 @@ export const Common = {
                 password: "Passwort",
                 mainFeatures: "Hauptmerkmal",
                 feedbackPopUp: "Feedback",
+                lessons: "LEHREN",
+                categories: "KATEGORIEN",
+                languages: "SPRACHE",
+                deleteion: "Löschung",
+                author: "Autor",
             },
             placeholder: {
                 commentInput: "Ihr Kommentar...",
@@ -99,6 +118,8 @@ export const Common = {
                 feedbackBtn: "Laisser des commentaires",
                 cancelBtn: "Stornieren",
                 sendBtn: "Speichern",
+                deleteBtn: "Löschen",
+                studyBtn: "Studie",
             },
             error: {
                 empty: "Bitte füllen Sie dieses Feld aus!",
@@ -113,6 +134,13 @@ export const Common = {
                 "gr": "Deutsch",
                 "fr": "Französisch",
                 "ru": "Russisch",
+                "ch": "Chinesisch",
+                "jp": "Japanisch",
+            },
+            categories: {
+                reading: "lesung",
+                grammar: "grammatik",
+                speaking: "sprechen",
             },
             menu: {
                 home: "Startseite",
@@ -158,6 +186,11 @@ export const Common = {
                 password: "Mot de Passe",
                 mainFeatures: "Caractéristiques Principales",
                 feedbackPopUp: "Commentaires",
+                lessons: "LEÇONS",
+                categories: "CATÉGORIES",
+                languages: "LANGUES",
+                deleteion: "Suppression",
+                author: "Auteur",
             },
             placeholder: {
                 commentInput: "Votre commentaire...",
@@ -173,6 +206,8 @@ export const Common = {
                 feedbackBtn: "Laisser des commentaires",
                 cancelBtn: "Annuler",
                 sendBtn: "Sauvegarder",
+                deleteBtn: "Supprimer",
+                studyBtn: "Étude",
             },
             error: {
                 empty: "Veuillez remplir ce champ!",
@@ -187,6 +222,13 @@ export const Common = {
                 "gr": "Allemand",
                 "fr": "Français",
                 "ru": "Russe",
+                "ch": "Chinois",
+                "jp": "Japonais",
+            },
+            categories: {
+                reading: "lecture",
+                grammar: "grammaire",
+                speaking: "parler",
             },
             menu: {
                 home: "Accueil",
@@ -232,6 +274,11 @@ export const Common = {
                 password: "Пароль",
                 mainFeatures: "Основные преимущества",
                 feedbackPopUp: "Обратная связь",
+                lessons: "УРОКИ",
+                categories: "КАТЕГОРИИ",
+                languages: "ЯЗЫКИ",
+                deleteion: "Удаление",
+                author: "Автор",
             },
             placeholder: {
                 commentInput: "Ваш комментарий...",
@@ -247,6 +294,8 @@ export const Common = {
                 feedbackBtn: "Оставить отзыв",
                 cancelBtn: "Отмена",
                 sendBtn: "Отправить",
+                deleteBtn: "Удалить",
+                studyBtn: "Изучить",
             },
             error: {
                 empty: "Пожалуйста, заполните это поле!",
@@ -261,6 +310,13 @@ export const Common = {
                 "gr": "Немецкий",
                 "fr": "Французский",
                 "ru": "Русский",
+                "ch": "Китайский",
+                "jp": "Японский",
+            },
+            categories: {
+                reading: "чтение",
+                grammar: "грамматика",
+                speaking: "говорение",
             },
             menu: {
                 home: "Главная",

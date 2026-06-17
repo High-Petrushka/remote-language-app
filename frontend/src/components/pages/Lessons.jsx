@@ -27,6 +27,11 @@ export function Lessons() {
     const [deleted, setDeleted] = useState(false);
 
     const token = localStorage.getItem("token");
+    let lang = localStorage.getItem("language");
+
+    if (!lang) {
+        lang = "en";
+    }
 
     const getLanguage = (languageId) => {
         if (language === languageId) {
@@ -66,25 +71,25 @@ export function Lessons() {
     return (
         <Container>
             <LessonsPageLayout>
-                <DisplayHero>LESSONS</DisplayHero>
+                <DisplayHero>{ Common.lines[lang]["title"]["lessons"] }</DisplayHero>
                 <div className="flex flex-col gap-4">
                     <div className="flex items-center justify-between">
-                        <FilterTitle>CATEGORIES</FilterTitle>
-                        <div className="flex gap-2">
-                            <FilterBtn handleClick={() => {if (category === "1") { setCategory("") } else { setCategory("1") }}} active={category === "1"}>reading</FilterBtn>
-                            <FilterBtn handleClick={() => category === "2" ? setCategory("") : setCategory("2")} active={category === "2"}>grammar</FilterBtn>
-                            <FilterBtn handleClick={() => category === "3" ? setCategory("") : setCategory("3")} active={category === "3"}>speaking</FilterBtn>
+                        <FilterTitle>{ Common.lines[lang]["title"]["categories"] }</FilterTitle>
+                        <div className="flex gap-2 flex-wrap justify-end">
+                            <FilterBtn handleClick={() => {if (category === "1") { setCategory("") } else { setCategory("1") }}} active={category === "1"}>{ Common.lines[lang]["categories"]["reading"] }</FilterBtn>
+                            <FilterBtn handleClick={() => category === "2" ? setCategory("") : setCategory("2")} active={category === "2"}>{ Common.lines[lang]["categories"]["grammar"] }</FilterBtn>
+                            <FilterBtn handleClick={() => category === "3" ? setCategory("") : setCategory("3")} active={category === "3"}>{ Common.lines[lang]["categories"]["speaking"] }</FilterBtn>
                         </div>
                     </div>
                     <div className="flex items-center justify-between">
                         <div className="flex gap-2 flex-wrap">
-                            <FilterBtn handleClick={() => getLanguage("1")} active={language === "1"}>english</FilterBtn>
-                            <FilterBtn handleClick={() => getLanguage("2")} active={language === "2"}>german</FilterBtn>
-                            <FilterBtn handleClick={() => getLanguage("3")} active={language === "3"}>french</FilterBtn>
-                            <FilterBtn handleClick={() => getLanguage("4")} active={language === "4"}>chinese</FilterBtn>
-                            <FilterBtn handleClick={() => getLanguage("5")} active={language === "5"}>japanese</FilterBtn>
+                            <FilterBtn handleClick={() => getLanguage("1")} active={language === "1"}>{ Common.lines[lang]["languages"]["en"] }</FilterBtn>
+                            <FilterBtn handleClick={() => getLanguage("2")} active={language === "2"}>{ Common.lines[lang]["languages"]["gr"] }</FilterBtn>
+                            <FilterBtn handleClick={() => getLanguage("3")} active={language === "3"}>{ Common.lines[lang]["languages"]["fr"] }</FilterBtn>
+                            <FilterBtn handleClick={() => getLanguage("4")} active={language === "4"}>{ Common.lines[lang]["languages"]["ch"] }</FilterBtn>
+                            <FilterBtn handleClick={() => getLanguage("5")} active={language === "5"}>{ Common.lines[lang]["languages"]["jp"] }</FilterBtn>
                         </div>
-                        <FilterTitle>LANGUAGES</FilterTitle>
+                        <FilterTitle>{ Common.lines[lang]["title"]["languages"] }</FilterTitle>
                     </div>
                 </div>
                 <LessonsLayout>
@@ -101,6 +106,7 @@ export function Lessons() {
                                 author={lesson.owner}
                                 created={lesson.created}
                                 owner_id={lesson.owner_id}
+                                lang={lang}
                                 handleDelete={() => {
                                     window.scrollTo(0, 0);
                                     document.querySelector("body").style.overflow = "hidden";
@@ -115,8 +121,8 @@ export function Lessons() {
             <PopActionLayout hidden={deleteHidden} >
                 <PopUpBodyLayout>
                     <InputLayout>
-                    <Hero level={6}>Deletion</Hero>
-                    <p className="text-[16px] lg:text-lg">{ Common.lines.en.question.lessonDelete }</p>
+                    <Hero level={6}>{ Common.lines[lang]["title"]["deleteion"] }</Hero>
+                    <p className="text-[16px] lg:text-lg">{ Common.lines[lang]["question"]["lessonDelete"] }</p>
                     </InputLayout>
                     <div className="flex gap-2">
                         <Button
@@ -126,13 +132,13 @@ export function Lessons() {
                                 setLessonToDelete(null);
                                 document.querySelector("body").style.overflowY = "scroll";
                             }}
-                        >Cancel</Button>
+                        >{ Common.lines[lang]["button"]["cancelBtn"] }</Button>
                         <DangerButton
                             type="button"
                             handleClick={() => {
                                 deleteLesson(lessonToDelete);
                             }}
-                        >Delete</DangerButton>
+                        >{ Common.lines[lang]["button"]["deleteBtn"] }</DangerButton>
                     </div>
                 </PopUpBodyLayout>
             </PopActionLayout>

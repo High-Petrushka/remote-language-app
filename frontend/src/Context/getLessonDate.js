@@ -3,42 +3,42 @@ export function getLessonDate(lessonDate) {
 
     switch (formatDate[1]) {
         case "01":
-            formatDate[1] = "Jan";
+            formatDate[1] = "01";
             break;
         case "02":
-            formatDate[1] = "Feb";
+            formatDate[1] = "02";
             break;
         case "03":
-            formatDate[1] = "Mar";
+            formatDate[1] = "03";
             break;
         case "04":
-            formatDate[1] = "Apr";
+            formatDate[1] = "04";
             break;
         case "05":
-            formatDate[1] = "May";
+            formatDate[1] = "05";
             break;
         case "06":
-            formatDate[1] = "Jun";
+            formatDate[1] = "06";
             break;
         case "07":
-            formatDate[1] = "Jul";
+            formatDate[1] = "07";
             break;
         case "08":
-            formatDate[1] = "Aug";
+            formatDate[1] = "08";
             break;
         case "09":
-            formatDate[1] = "Sep";
+            formatDate[1] = "09";
             break;
         case "10":
-            formatDate[1] = "Oct";
+            formatDate[1] = "10";
             break;
         case "11":
-            formatDate[1] = "Nov";
+            formatDate[1] = "11";
             break;
         case "12":
-            formatDate[1] = "Dec";
+            formatDate[1] = "12";
             break;
     }
 
-    return formatDate.join(" ");
+    return formatDate.join(".");
 }
