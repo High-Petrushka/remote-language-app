@@ -32,7 +32,7 @@ class MyUserManager(BaseUserManager):
         return user
 
 
-def get_avatar_upload_path(instance: MyUser, filename: str) -> str:
+def get_avatar_upload_path(instance, filename):
     return f"{instance.username}/avatars/{filename}"
 
 
