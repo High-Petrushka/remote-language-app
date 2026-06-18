@@ -13,7 +13,7 @@ class Language(models.Model):
         return f"{self.name}"
 
 
-def get_poster_upload_path(instance: Lesson, filename: str) -> str:
+def get_poster_upload_path(instance, filename):
     return f"{instance.owner}/lessons/{filename}"
 
 
@@ -69,18 +69,18 @@ class SolvedLesson(AbstractModel):
         return f"lesson - {self.lesson.id}, solved by {self.user}"
 
     @staticmethod
-    def get_solved_lesson(lesson: Lesson, user: MyUser) -> SolvedLesson:
+    def get_solved_lesson(lesson, user):
         try:
             return SolvedLesson.objects.filter(lesson=lesson).get(user=user)
         except (ObjectDoesNotExist, ValueError, TypeError):
             raise Http404
 
     @staticmethod
-    def was_solved(lesson: Lesson, user: MyUser) -> bool:
+    def was_solved(lesson, user):
         return SolvedLesson.objects.filter(lesson=lesson, user=user).exists()
 
     @staticmethod
-    def user_result(lesson: Lesson, user: MyUser) -> int:
+    def user_result(lesson, user):
         if SolvedLesson.was_solved(lesson, user):
             return SolvedLesson.objects.filter(lesson=lesson).get(user=user).result
         return 0
