@@ -14,6 +14,7 @@ import { Profile } from "./components/pages/Profile.jsx";
 import { LessonDetail } from "./components/pages/LessonDetail.jsx";
 import { NotFound } from "./components/pages/NotFound.jsx";
 import { Creation } from "./components/pages/Creation.jsx";
+import { FeedbackPage } from "./components/pages/FeedbackPage.jsx";
 
 function App() {
 
@@ -34,6 +35,7 @@ function App() {
         <Route path="creation/" element={<Creation />} />
         <Route path='registration' element={<Registration />} />
         <Route path='login' element={<Login />} />
+        <Route path='feedback' element={<FeedbackPage />} />
 
         <Route path="*" element={<NotFound />} />
       </Routes>

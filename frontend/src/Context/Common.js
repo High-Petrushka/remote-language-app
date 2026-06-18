@@ -5,6 +5,7 @@ export const Common = {
     lines: {
         en: {
             title: {
+                username: "Username",
                 name: "Name",
                 surname: "Surname",
                 password: "Password",
@@ -15,10 +16,14 @@ export const Common = {
                 languages: "LANGUAGES",
                 deleteion: "Deletion",
                 author: "Author",
+                login: "Login",
+                feedbackPage: "ADMIN",
             },
             placeholder: {
                 commentInput: "Your comment...",
-                feedbackInput: "Your feedback..."
+                feedbackInput: "Your feedback...",
+                login: "Your username...",
+                password: "Your password...",
             },
             button: {
                 saveBtn: "Save",
@@ -32,11 +37,13 @@ export const Common = {
                 sendBtn: "Save",
                 deleteBtn: "Delete",
                 studyBtn: "Study",
+                loginBtn: "Login",
             },
             error: {
                 empty: "Please, fill this field!",
                 testMin: "Test has to include at least 2 tasks!",
                 testMax: "Test can contain no more than 10 tasks!",
+                loginPassword: "Incorrect login or password!",
             },
             question: {
                 lessonDelete: "Are you sure you want to delete this lesson?",
@@ -63,6 +70,7 @@ export const Common = {
                 logout: "Logout",
                 login: "Login",
                 registration: "Registration",
+                feedback: "Feedback",
             },
             home: {
                 title: "Expand your horizons in terms of language learning",
@@ -93,6 +101,7 @@ export const Common = {
         },
         gr: {
             title: {
+                username: "Benutzernamen",
                 name: "Name",
                 surname: "Familienname",
                 password: "Passwort",
@@ -103,10 +112,14 @@ export const Common = {
                 languages: "SPRACHE",
                 deleteion: "Löschung",
                 author: "Autor",
+                login: "Login",
+                feedbackPage: "ADMIN",
             },
             placeholder: {
                 commentInput: "Ihr Kommentar...",
                 feedbackInput: "Ihr Feedback...",
+                login: "Ihr Benutzername...",
+                password: "Ihr Passwort...",
             },
             button: {
                 saveBtn: "Speichern",
@@ -120,11 +133,13 @@ export const Common = {
                 sendBtn: "Speichern",
                 deleteBtn: "Löschen",
                 studyBtn: "Studie",
+                loginBtn: "Login",
             },
             error: {
                 empty: "Bitte füllen Sie dieses Feld aus!",
                 testMin: "Der Test muss mindestens 2 Aufgaben enthalten!",
                 testMax: "Der Test kann nicht mehr als 10 Aufgaben enthalten!",
+                loginPassword: "Falsches Login oder Passwort!",
             },
             question: {
                 lessonDelete: "Sind Sie sicher, dass Sie diese Lektion löschen möchten?",
@@ -151,6 +166,7 @@ export const Common = {
                 logout: "Abmelden",
                 login: "Login",
                 registration: "Registrierung",
+                feedback: "Feedback",
             },
             home: {
                 title: "Erweitern Sie Ihren Horizont in Bezug auf das Sprachenlernen",
@@ -181,6 +197,7 @@ export const Common = {
         },
         fr: {
             title: {
+                username: "Nom d'utilisateur",
                 name: "Nom",
                 surname: "Nom de Famille",
                 password: "Mot de Passe",
@@ -191,10 +208,14 @@ export const Common = {
                 languages: "LANGUES",
                 deleteion: "Suppression",
                 author: "Auteur",
+                login: "Connexion",
+                feedbackPage: "ADMIN",
             },
             placeholder: {
                 commentInput: "Votre commentaire...",
                 feedbackInput: "Vos commentaires...",
+                login: "Votre nom d'utilisateur...",
+                password: "Votre mot de passe...",
             },
             button: {
                 saveBtn: "Sauvegarder",
@@ -208,11 +229,13 @@ export const Common = {
                 sendBtn: "Sauvegarder",
                 deleteBtn: "Supprimer",
                 studyBtn: "Étude",
+                loginBtn: "Connexion",
             },
             error: {
                 empty: "Veuillez remplir ce champ!",
                 testMin: "Le test doit inclure au moins 2 tâches!",
                 testMax: "Le test ne peut pas contenir plus de 10 tâches!",
+                loginPassword: "Identifiant ou mot de passe incorrect!",
             },
             question: {
                 lessonDelete: "Êtes-vous sûr de vouloir supprimer cette leçon?",
@@ -239,6 +262,7 @@ export const Common = {
                 logout: "Déconnexion",
                 login: "Connexion",
                 registration: "Inscription",
+                feedback: "Commentaires",
             },
             home: {
                 title: "Élargir les horizons en termes d'apprentissage des langues",
@@ -269,6 +293,7 @@ export const Common = {
         },
         ru: {
             title: {
+                username: "Логин",
                 name: "Имя",
                 surname: "Фамилия",
                 password: "Пароль",
@@ -279,10 +304,14 @@ export const Common = {
                 languages: "ЯЗЫКИ",
                 deleteion: "Удаление",
                 author: "Автор",
+                login: "Авторизация",
+                feedbackPage: "АДМИН",
             },
             placeholder: {
                 commentInput: "Ваш комментарий...",
                 feedbackInput: "Ваш отзыв...",
+                login: "Ваш логин...",
+                password: "Ваш пароль...",
             },
             button: {
                 saveBtn: "Сохранить",
@@ -296,11 +325,13 @@ export const Common = {
                 sendBtn: "Отправить",
                 deleteBtn: "Удалить",
                 studyBtn: "Изучить",
+                loginBtn: "Войти",
             },
             error: {
                 empty: "Пожалуйста, заполните это поле!",
                 testMin: "Тест должен содержать не менее 2 заданий!",
                 testMax: "Тест может содержать не более 10 заданий!",
+                loginPassword: "Неверный логин или пароль!",
             },
             question: {
                 lessonDelete: "Вы уверены, что хотите удалить этот урок?",
@@ -327,6 +358,7 @@ export const Common = {
                 logout: "Выход",
                 login: "Вход",
                 registration: "Регистрация",
+                feedback: "Отзывы",
             },
             home: {
                 title: "Расширьте своё представление об изучении языков",

@@ -54,12 +54,17 @@ export function NavPanel() {
                     <MyNavLink path="/lessons" iconSrc={"/src/assets/menu/lessons.svg"}>{Common.lines[lang]["menu"]["lessons"]}</MyNavLink>
                     <MyNavLink path="/authors" iconSrc={"/src/assets/menu/authors.svg"}>{Common.lines[lang]["menu"]["authors"]}</MyNavLink>
                     <div className="pt-3 mt-3 border-t border-zinc-900">
-                        {token ?
-                            <MyNavLink path="/creation" iconSrc={"/src/assets/menu/plus.svg"}>{Common.lines[lang]["menu"]["create"]}</MyNavLink>
+                        {token && userId == 1 ?
+                            <MyNavLink path="/feedback" iconSrc={"/src/assets/menu/feedback.svg"}>{Common.lines[lang]["menu"]["feedback"]}</MyNavLink>
                         :
                         null
                         }
-                        {token ? 
+                        {token && !(userId == 1) ?
+                            <MyNavLink path="/creation" iconSrc={"/src/assets/menu/plus.svg"}>{Common.lines[lang]["menu"]["create"]}</MyNavLink>
+                        :
+                            null
+                        }
+                        {token && !(userId == 1)? 
                             <MyNavLink path={`/profile/${userId}`} iconSrc={"/src/assets/menu/menu-user.svg"}>{Common.lines[lang]["menu"]["profile"]}</MyNavLink>
                         :
                         null

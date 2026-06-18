@@ -54,7 +54,7 @@ export function Home() {
         {body: userFeedback, grade: grade},
         {headers: {"Authorization": token}}
       )
-      .then((res) => {
+      .then(() => {
         setFeedbackHidden(true);
         setUserFeedback("");
         setGrade(1);

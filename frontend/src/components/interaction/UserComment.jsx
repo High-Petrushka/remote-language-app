@@ -2,7 +2,6 @@ import { Link } from "react-router";
 import { Hero } from "../Typography/Hero";
 
 export function UserComment({ id, userId, lessonId, body, userAvatar, userName, handleClick }) {
-    const token = localStorage.getItem("token");
     const curUser = localStorage.getItem("userId");
 
     return (
