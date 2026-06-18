@@ -41,7 +41,7 @@ export function Login() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        loginUser("http://localhost:8000/login/", {
+        loginUser(`${Common.url}/login/`, {
             username: login,
             password: password,
         });

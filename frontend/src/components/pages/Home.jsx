@@ -18,6 +18,7 @@ import { InputLayout } from "../layout/InputLayout";
 import { PopUpBodyLayout } from "../layout/PopUpBodyLayout";
 import { TextInput } from "../interaction/TextInput";
 import { RadioInput } from "../interaction/RadioInput";
+import { CookiePopUp } from "../interaction/CookiePopUp";
 
 export function Home() {
   const [homeInfo, setHomeInfo] = useState([]);
@@ -25,6 +26,7 @@ export function Home() {
   const [userFeedback, setUserFeedback] = useState("");
   const [feedbackError, setFeedbackError] = useState(false);
   const [grade, setGrade] = useState(1);
+  const [confirmed, setConfirmed] = useState(true);
 
   const token = localStorage.getItem("token");
   const userId = localStorage.getItem("userId");
@@ -33,6 +35,11 @@ export function Home() {
 
   if (!lang) {
     lang = "en";
+  }
+
+  function confirmPolicy() {
+    localStorage.setItem("isConfirmed", true);
+    setConfirmed(!confirmed);
   }
 
   async function getHomeInfo() {
@@ -78,7 +85,7 @@ export function Home() {
 
     window.addEventListener("scroll", handleScroll, true);
 
-  }, []);
+  }, [confirmed]);
 
   return (
     <Container>
@@ -224,6 +231,7 @@ export function Home() {
           </div>
         </PopUpBodyLayout>
       </PopActionLayout>
+      <CookiePopUp handleConfirm={confirmPolicy} />
     </Container>
   );
 }

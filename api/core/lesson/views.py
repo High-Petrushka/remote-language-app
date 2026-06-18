@@ -17,7 +17,7 @@ from core.lesson.serializers import LessonSerializer, LessonListSerializer, Test
 from core.auth.permissions import IsOwnerOrReadOnly
 
 
-class LessonList(APIView, PageNumberPagination):
+class LessonList(APIView):
     serializer_class = LessonSerializer
     permission_classes = (IsAuthenticatedOrReadOnly,)
 
@@ -33,8 +33,7 @@ class LessonList(APIView, PageNumberPagination):
         if language:
             lessons = lessons.filter(language=language)
 
-        results = self.paginate_queryset(lessons, request, view=self)
-        serializer = LessonListSerializer(results, many=True, context={"request": request})
+        serializer = LessonListSerializer(lessons, many=True, context={"request": request})
         return Response(serializer.data)
 
     def post(self, request):

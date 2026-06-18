@@ -2,8 +2,10 @@ import { Button } from "./Button";
 import { OutlineBlackButton } from "./OutlineBlackButton";
 import { Link } from "react-router";
 import { Hero } from "../Typography/Hero";
+import { DangerButton } from "./DangerButton";
+import { Common } from "../../Context/Common";
 
-export function UserFeedback({ userId, userName, grade, body, selected, handleSet, handleUnset }) {
+export function UserFeedback({ userId, userName, grade, body, selected, lang, handleSelect, handleDelete }) {
     const gradeArray = Array(grade).fill(0);
 
     return (
@@ -21,13 +23,18 @@ export function UserFeedback({ userId, userName, grade, body, selected, handleSe
                         }
                     </div>
                 </div>
-                <div className="w-fit">
-                    {
-                        selected ?
-                            <OutlineBlackButton type="button" handleClick={() => handleUnset()}>Unset</OutlineBlackButton>
-                        :
-                            <Button type="button" handleClick={() => handleSet()}>Select</Button>
-                    }
+                <div className="flex items-center gap-4">
+                    <div className="w-fit">
+                        {
+                            selected ?
+                                <OutlineBlackButton type="button" handleClick={handleSelect}>{ Common.lines[lang]["button"]["hide"] }</OutlineBlackButton>
+                            :
+                                <Button type="button" handleClick={handleSelect}>{ Common.lines[lang]["button"]["show"] }</Button>
+                        }
+                    </div>
+                    <div className="w-fit">
+                        <img src="/src/assets/icons/trash.svg" alt="Trash icon" role="button" onClick={handleDelete} className="cursor-pointer" />
+                    </div>
                 </div>
             </div>
             <div>

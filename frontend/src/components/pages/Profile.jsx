@@ -66,7 +66,7 @@ export function Profile() {
 
         axios.put(url, formData, {headers: {"Authorization": token}})
             .then(() => {
-                setMessage("Saved successfully!");
+                setMessage(Common.lines[lang]["message"]["saved"]);
                 setMsgHidden(false);
                 setTimeout(() => {
                     setMsgHidden(true);
@@ -112,7 +112,7 @@ export function Profile() {
         if (params.userId == "1" && curUser !== 1) {
             navigate("/")
         }
-        const user = getUser(`http://localhost:8000/users/${Number(params.userId)}/`);
+        const user = getUser(`${Common.url}/users/${Number(params.userId)}/`);
         user.then(response => {
             setUserInfo({...response});
             setLessons([...response["lesson_set"]]);
@@ -133,7 +133,7 @@ export function Profile() {
         nameComp = <ProfileInput
                 title={`${Common.lines[lang]["title"]["name"]}`}
                 id="name"
-                placeholder="Your name..."
+                placeholder={Common.lines[lang]["placeholder"]["name"]}
                 value={newName}
                 handleChange={(e) => setNewName(e.target.value)}
                 incorrect={false}
@@ -142,7 +142,7 @@ export function Profile() {
         surnameComp = <ProfileInput
                 title={`${Common.lines[lang]["title"]["surname"]}`}
                 id="surname"
-                placeholder="Your surname..."
+                placeholder={Common.lines[lang]["placeholder"]["surname"]}
                 value={newSurname}
                 handleChange={(e) => setNewSurname(e.target.value)}
                 incorrect={false}
@@ -160,7 +160,7 @@ export function Profile() {
         bioComp = <ProfileBioInput
                 id="bio"
                 value={newBio}
-                placeholder="Your bio..."
+                placeholder={Common.lines[lang]["placeholder"]["bio"]}
                 handleChange={(e) => setNewBio(e.target.value)}
              />
         avatarInputComp = (<div className="pt-6 flex items-center justify-between">
@@ -209,7 +209,7 @@ export function Profile() {
                     </div>
                 </ProfileInfoLayout>
                 <ProfileLessonLayout lessons={lessons.length}>
-                    <Hero level={2}>Lessons by {userInfo.username}</Hero>
+                    <Hero level={2}>{ Common.lines[lang]["title"]["lessonsBy"] } {userInfo.username}</Hero>
                     <div className="grid grid-cols-1 lg:grid-cols-2">
                         {
                             lessons.length === 0 ?
@@ -240,8 +240,8 @@ export function Profile() {
             <PopActionLayout hidden={deleteHidden} >
                 <PopUpBodyLayout>
                     <InputLayout>
-                    <Hero level={6}>Deletion</Hero>
-                    <p className="text-[16px] lg:text-lg">{ Common.lines.en.question.lessonDelete }</p>
+                    <Hero level={6}>{ Common.lines[lang]["title"]["deleteion"] }</Hero>
+                    <p className="text-[16px] lg:text-lg">{ Common.lines[lang]["question"]["lessonDelete"] }</p>
                     </InputLayout>
                     <div className="flex gap-2">
                         <Button
@@ -250,7 +250,7 @@ export function Profile() {
                                 setDeleteHidden(true);
                                 document.querySelector("body").style.overflowY = "scroll";
                             }}
-                        >Cancel</Button>
+                        >{ Common.lines[lang]["button"]["cancelBtn"] }</Button>
                         <DangerButton
                             type="button"
                             handleClick={() => {
@@ -258,7 +258,7 @@ export function Profile() {
                                 setDeleteHidden(true);
                                 document.querySelector("body").style.overflowY = "scroll";
                             }}
-                        >Delete</DangerButton>
+                        >{ Common.lines[lang]["button"]["deleteBtn"] }</DangerButton>
                     </div>
                 </PopUpBodyLayout>
             </PopActionLayout>

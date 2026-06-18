@@ -7,6 +7,7 @@ import { AuthLayout } from "../layout/AuthLayout";
 import { Container } from "../layout/Container";
 import { InputLayout } from "../layout/InputLayout";
 import { Hero } from "../Typography/Hero";
+import { Common } from "../../Context/Common";
 
 export function Registration() {
     const [login, setLogin] = useState("");
@@ -26,6 +27,11 @@ export function Registration() {
 
     const navigate = useNavigate();
     const token = localStorage.getItem("token");
+    let lang = localStorage.getItem("language");
+
+    if (!lang) {
+        lang = "en";
+    }
 
     const handleLogin = (e) => {
         setLogin(e.target.value);
@@ -58,7 +64,7 @@ export function Registration() {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        register('http://localhost:8000/registration/');
+        register(`${Common.url}/registration/`);
     };
 
     async function register(url) {
@@ -110,27 +116,27 @@ export function Registration() {
     return (
         <Container>
             <AuthLayout>
-                <Hero level={1}>Registration</Hero>
+                <Hero level={1}>{ Common.lines[lang]["title"]["registration"] }</Hero>
                 <form encType="multipart/form-data" method="POST" id="registerForm" className="min-w-96 my-0 mx-auto flex flex-col gap-8">
                     <InputLayout>
                         <Input
                             id="username"
                             value={login}
                             handleChange={handleLogin}
-                            title="Login"
+                            title={Common.lines[lang]["title"]["username"]}
                             type="text"
-                            placeholder="Your login..."
-                            errorText={loginError}
+                            placeholder={Common.lines[lang]["placeholder"]["login"]}
+                            errorText={Common.lines[lang]["error"]["empty"]}
                             incorrect={loginErrorFlag}
                         />
                         <Input
                             id="first_name"
                             value={firstName}
                             handleChange={handleFirstName}
-                            title="First name"
+                            title={Common.lines[lang]["title"]["name"]}
                             type="text"
-                            placeholder="Your first name..."
-                            errorText={firstNameError}
+                            placeholder={Common.lines[lang]["placeholder"]["name"]}
+                            errorText={Common.lines[lang]["error"]["empty"]}
                             incorrect={firstNameErrorFlag}
                         />
                         <Input
@@ -140,21 +146,21 @@ export function Registration() {
                             title="Email"
                             type="email"
                             placeholder="you@example.com"
-                            errorText={emailError}
+                            errorText={Common.lines[lang]["error"]["empty"]}
                             incorrect={emailErrorFlag}
                         />
                         <Input
                             id="password"
                             value={password}
                             handleChange={handlePassword}
-                            title="Password"
+                            title={Common.lines[lang]["title"]["password"]}
                             type="password"
-                            placeholder="Your password..."
-                            errorText={passwordError}
+                            placeholder={Common.lines[lang]["placeholder"]["password"]}
+                            errorText={Common.lines[lang]["error"]["empty"]}
                             incorrect={passwordErrorFlag}
                         />
                     </InputLayout>
-                    <Button handleClick={handleSubmit} type="submit">Registration</Button>
+                    <Button handleClick={handleSubmit} type="submit">{Common.lines[lang]["button"]["registerBtn"]}</Button>
                 </form>
             </AuthLayout>
         </Container>

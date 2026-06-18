@@ -15,6 +15,7 @@ import { LessonDetail } from "./components/pages/LessonDetail.jsx";
 import { NotFound } from "./components/pages/NotFound.jsx";
 import { Creation } from "./components/pages/Creation.jsx";
 import { FeedbackPage } from "./components/pages/FeedbackPage.jsx";
+import { Policy } from "./components/pages/Policy.jsx";
 
 function App() {
 
@@ -36,6 +37,7 @@ function App() {
         <Route path='registration' element={<Registration />} />
         <Route path='login' element={<Login />} />
         <Route path='feedback' element={<FeedbackPage />} />
+        <Route path='policy' element={<Policy />} />
 
         <Route path="*" element={<NotFound />} />
       </Routes>

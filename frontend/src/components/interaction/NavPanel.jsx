@@ -6,6 +6,7 @@ import { MyNavLink } from "./MyNavLink";
 import { Common } from "../../Context/Common";
 import { Select } from "./Select";
 import axios from "axios";
+import { Link } from "react-router";
 
 export function NavPanel() {
     const {hidden} = useContext(NavContext);
@@ -82,7 +83,10 @@ export function NavPanel() {
                     </div>
                     <Select id="language" optionList={JSON.stringify(languages)} curVal={lang} handleChange={handleLanguage} />
                 </NavLinksLayout>
-                <span className="text-[12px] text-zinc-700 mx-auto">RLang &#174; 2026. All rights reserved.</span>
+                <div className="flex flex-col">
+                    <Link to={"/policy"} className="text-[12px] text-indigo-500 underline ml-4">Policy</Link>
+                    <span className="text-[12px] text-zinc-700 mx-auto">RLang &#174; 2026. All rights reserved.</span>
+                </div>
             </NavPanelLayout>
         </div>
     );

@@ -33,6 +33,11 @@ import { CommentsLayout } from "../layout/CommentsLayout";
 export function LessonDetail() {
     const token = localStorage.getItem("token");
     const params = useParams();
+    let lang = localStorage.getItem("language");
+
+    if (!lang) {
+        lang = "en";
+    }
 
     const [lessonInfo, setLessonInfo] = useState({});
     const [testAnswer, setTestAnswer] = useState([]);
@@ -81,7 +86,7 @@ export function LessonDetail() {
             setTestRes(res.data["result"]);
             setTestAnswer(testAnswer.map(() => ""));
 
-            setMessage(`${res.data["message"]} Result: ${res.data["result"]} of ${taskCount}`);
+            setMessage(`${res.data["message"]} Result: ${res.data["result"]} ${Common.lines[lang]["title"]["of"]} ${taskCount}`);
             setHidden(false);
             setTimeout(() => {
                 setHidden(true);
@@ -209,24 +214,24 @@ export function LessonDetail() {
                     <div className="flex items-end justify-between">
                         <div className="flex gap-4 flex-wrap items-center">
                             <Link to={`/profile/${lessonInfo["owner_id"]}/`}>
-                                <AddInfo title="Author">{ lessonInfo["owner"] }</AddInfo>
+                                <AddInfo title={Common.lines[lang]["title"]["author"]}>{ lessonInfo["owner"] }</AddInfo>
                             </Link>
-                            <AddInfo title="Date">{ lessonInfo["created"] ? getLessonDate(lessonInfo["created"]) : "" }</AddInfo>
+                            <AddInfo title={Common.lines[lang]["title"]["date"]}>{ lessonInfo["created"] ? getLessonDate(lessonInfo["created"]) : "" }</AddInfo>
                             <div className="flex gap-1">
                                 <Like active={liked} handleClick={() => handleLike()} />
                                 { lessonInfo["likes_count"] ? lessonInfo["likes_count"] : 0 }
                             </div>
                         </div>
                         <div className="flex gap-2">
-                            <Bage>{ lessonInfo["type"] ? lessonInfo["type"] : "" }</Bage>
-                            <Bage>{ lessonInfo["language"] ? lessonInfo["language"] : "" }</Bage>
+                            <Bage>{ lessonInfo["type"] ? Common.lines[lang]["categories"][lessonInfo["type"]] : "" }</Bage>
+                            <Bage>{ lessonInfo["language"] ? Common.lines[lang]["lessonLang"][lessonInfo["language"]] : "" }</Bage>
                         </div>
                     </div>
                 </LessonContentLayout>
                 {token ? (
                 <LessonTestLayout test={lessonInfo["test"] ? lessonInfo["test"] : null}>
                     <div className="flex items-center justify-between gap-2 flex-wrap">
-                        <Hero level={2}>Lesson's Test</Hero>
+                        <Hero level={2}>{Common.lines[lang]["title"]["test"]}</Hero>
                         <TestResult
                             oldRes={lessonInfo["result"] ? lessonInfo["result"] : 0}
                             newRes={testRes}
@@ -259,7 +264,7 @@ export function LessonDetail() {
                         }
                     </div>
                     <div className="w-[min(400px,100%)] ml-auto">
-                        <Button handleClick={() => handleTest()}>Check Test</Button>
+                        <Button handleClick={() => handleTest()}>{ Common.lines[lang]["button"]["checkTestBtn"] }</Button>
                     </div>
                     {!token ? <TestShield /> : null}
                 </LessonTestLayout>)
@@ -267,13 +272,13 @@ export function LessonDetail() {
                     }
                 <LessonTestLayout test={true}>
                     <div className="flex items-center justify-between flex-wrap gap-2">
-                        <Hero level={2}>Comments</Hero>
+                        <Hero level={2}>{ Common.lines[lang]["title"]["comments"] }</Hero>
                         <div className="w-[min(400px,100%)] ml-auto" style={!token ? {"display": "none"} : {"display": "flex"}}>
                             <Button handleClick={() => {
                                 window.scrollTo(0, 0);
                                 document.querySelector("body").style.overflow = "hidden";
                                 setCommentHidden(false);
-                            }}>Add Comment</Button>
+                            }}>{ Common.lines[lang]["button"]["addCommentBtn"] }</Button>
                         </div>
                     </div>
                     <CommentsLayout>
@@ -288,6 +293,7 @@ export function LessonDetail() {
                                         body={comment["body"]}
                                         userName={comment["author"]["username"]}
                                         userAvatar={comment["author"]["avatar"]}
+                                        lessonAuthorId={lessonInfo["owner_id"]}
                                         handleClick={deleteComment}
                                     />
                                 ))
@@ -301,17 +307,17 @@ export function LessonDetail() {
             <PopActionLayout hidden={commentHidden}>
                 <div className="bg-neutral-50 rounded-md w-[min(400px,100%)] py-5 px-6 flex flex-col gap-8">
                     <InputLayout>
-                        <Hero level={6}>Comment</Hero>
+                        <Hero level={6}>{ Common.lines[lang]["title"]["comment"] }</Hero>
                         <TextInput
                             id="userComment"
                             value={userComment}
-                            placeholder={Common.lines.en.placeholder.commentInput}
+                            placeholder={Common.lines[lang]["placeholder"]["commentInput"]}
                             handleChange={(e) => {
                                 setUserComment(e.target.value)
                                 setCommentError(false);
                             }}
                             isErr={commentError}
-                            errMsg={Common.lines.en.error.empty}
+                            errMsg={Common.lines[lang]["error"]["empty"]}
                         />
                     </InputLayout>
                     <div className="flex gap-2">
@@ -320,11 +326,11 @@ export function LessonDetail() {
                             setCommentHidden(true);
                             setUserComment("");
                             setCommentError(false);
-                        }}>Cancel</DangerButton>
+                        }}>{Common.lines[lang]["button"]["cancelBtn"]}</DangerButton>
                         <Button type="button" handleClick={() => {
                             handleComment();
                             setAdded(!added);
-                        }}>Send</Button>
+                        }}>{Common.lines[lang]["button"]["sendBtn"]}</Button>
                     </div>
                 </div>
             </PopActionLayout>

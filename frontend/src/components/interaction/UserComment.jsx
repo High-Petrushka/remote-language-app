@@ -1,7 +1,7 @@
 import { Link } from "react-router";
 import { Hero } from "../Typography/Hero";
 
-export function UserComment({ id, userId, lessonId, body, userAvatar, userName, handleClick }) {
+export function UserComment({ id, userId, lessonId, body, userAvatar, userName, handleClick, lessonAuthorId }) {
     const curUser = localStorage.getItem("userId");
 
     return (
@@ -19,7 +19,7 @@ export function UserComment({ id, userId, lessonId, body, userAvatar, userName, 
                     </Link>
                 </div>
                 {
-                    curUser && (curUser == userId || curUser == 1) ?
+                    curUser && (curUser == userId || curUser == 1 || curUser == lessonAuthorId) ?
                         <img
                             src="/src/assets/icons/trash.svg"
                             alt="Trash icon" role="button"
