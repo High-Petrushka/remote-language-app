@@ -1,5 +1,5 @@
 export const Common = {
-    url: "http://remote-language-app.railway.internal",
+    url: "https://remote-language-app.railway.internal",
     networkErrorMsg: "Something went wrong. Try again later.",
     authErrorMsg: "You have to login first!",
     lines: {
