@@ -18,7 +18,7 @@ export function UserFeedback({ userId, userName, grade, body, selected, lang, ha
                     <div className="flex gap-2">
                         {
                             gradeArray.map((_, index) => (
-                                <img key={index} src="/src/assets/icons/star.svg" alt="Star icon" className="w-4.5" />
+                                <img key={index} src="/assets/icons/star.svg" alt="Star icon" className="w-4.5" />
                             ))
                         }
                     </div>
@@ -33,7 +33,7 @@ export function UserFeedback({ userId, userName, grade, body, selected, lang, ha
                         }
                     </div>
                     <div className="w-fit">
-                        <img src="/src/assets/icons/trash.svg" alt="Trash icon" role="button" onClick={handleDelete} className="cursor-pointer" />
+                        <img src="/assets/icons/trash.svg" alt="Trash icon" role="button" onClick={handleDelete} className="cursor-pointer" />
                     </div>
                 </div>
             </div>

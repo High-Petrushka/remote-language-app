@@ -215,9 +215,9 @@ export function Creation() {
                             <Hero level={6}>Poster</Hero>
                             {
                                 poster ?
-                                    <img src={poster ? URL.createObjectURL(document.getElementById("poster").files[0]) : "/src/assets/icons/lesson-default.svg"} alt="User poster image" className="w-[min(50vw,400px)] mx-auto" />
+                                    <img src={poster ? URL.createObjectURL(document.getElementById("poster").files[0]) : "/assets/icons/lesson-default.svg"} alt="User poster image" className="w-[min(50vw,400px)] mx-auto" />
                                 :
-                                    <img src="/src/assets/icons/lesson-default.svg" alt="Default poster image" className="w-[min(50vw,400px)] mx-auto" />
+                                    <img src="/assets/icons/lesson-default.svg" alt="Default poster image" className="w-[min(50vw,400px)] mx-auto" />
                             }
                             <div className="pt-6 flex items-center justify-between w-[min(392px,100%)] mx-auto">
                                 <input
@@ -228,7 +228,7 @@ export function Creation() {
                                     className="w-50 cursor-pointer active:outline active:outline-zinc-900"
                                     onChange={(e) => setPoster(e.target.value)}
                                 />
-                                <img src="/src/assets/icons/save.svg" alt="File icon" />
+                                <img src="/assets/icons/save.svg" alt="File icon" />
                             </div>
                         </CreationInputLayout>
                         <div className="min-h-50 flex flex-col gap-2">
@@ -263,7 +263,7 @@ export function Creation() {
                                         <div className="flex items-center justify-between">
                                             <Hero level={6}>Question</Hero>
                                             <img
-                                                src="/src/assets/icons/trash.svg"
+                                                src="/assets/icons/trash.svg"
                                                 alt="Trash image"
                                                 role="button"
                                                 className="cursor-pointer"

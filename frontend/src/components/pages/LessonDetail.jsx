@@ -202,9 +202,9 @@ export function LessonDetail() {
                         <div>
                             {
                                 lessonInfo["poster"] ?
-                                    <img src={lessonInfo["poster"] ? lessonInfo["poster"] : "/src/assets/icons/lesson-default.svg"} className="w-[min(50vw,400px)] mx-auto rounded-md" />
+                                    <img src={lessonInfo["poster"] ? lessonInfo["poster"] : "/assets/icons/lesson-default.svg"} className="w-[min(50vw,400px)] mx-auto rounded-md" />
                                 :
-                                    <img src="/src/assets/icons/lesson-default.svg" className="w-[min(50vw,400px)] mx-auto" />
+                                    <img src="/assets/icons/lesson-default.svg" className="w-[min(50vw,400px)] mx-auto" />
                             }
                         </div>
                         <div>

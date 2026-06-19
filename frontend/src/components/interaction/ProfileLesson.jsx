@@ -15,7 +15,7 @@ export function ProfileLesson({ id, title, imgSrc, type, language, lessonDate, o
                     imgSrc ?
                         <img src={imgSrc} alt="Lesson poster" className="w-37.5 h-auto max-w-37.5 mx-auto rounded-md" />
                     :
-                        <img src="/src/assets/icons/lesson-default.svg" alt="Lesson poster" className="w-37.5 h-auto max-w-37.5 mx-auto" />
+                        <img src="/assets/icons/lesson-default.svg" alt="Lesson poster" className="w-37.5 h-auto max-w-37.5 mx-auto" />
                 }
             </div>
             <div className="grow flex flex-col justify-center gap-4">
@@ -33,7 +33,7 @@ export function ProfileLesson({ id, title, imgSrc, type, language, lessonDate, o
             {
                 curUser && curUser == ownerId ?
                     <img
-                        src="/src/assets/icons/trash.svg"
+                        src="/assets/icons/trash.svg"
                         alt="Trash icon"
                         role="button"
                         className="absolute right-4 top-4 lg:right-8 lg:top-8 cursor-pointer"

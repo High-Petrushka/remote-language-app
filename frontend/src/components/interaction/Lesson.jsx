@@ -41,7 +41,7 @@ export function Lesson({ id, title, type, language, description, poster, author,
                 poster ?
                     <img src={poster} alt="Lesson poster" className="w-62.5 h-62.5 mx-auto aspect-square rounded-md" />
                 :
-                    <img src="/src/assets/icons/lesson-default.svg" alt="Lesson poster" className="w-62.5 h-62.5 mx-auto aspect-square" />
+                    <img src="/assets/icons/lesson-default.svg" alt="Lesson poster" className="w-62.5 h-62.5 mx-auto aspect-square" />
             }
             <div className="flex flex-col gap-3">
                 <Hero level={5}>{ title }</Hero>
@@ -64,7 +64,7 @@ export function Lesson({ id, title, type, language, description, poster, author,
                     }
                     <Link to={`/lesson/${id}/`} className="group flex items-center">
                         <span className="text-[16px] text-indigo-500 font-medium">{ Common.lines[lang]["button"]["studyBtn"] }</span>
-                        <img src="/src/assets/icons/colored-arrow-right.svg" className="group-hover:translate-x-2 transition-transform duration-150" />
+                        <img src="/assets/icons/colored-arrow-right.svg" className="group-hover:translate-x-2 transition-transform duration-150" />
                     </Link>
                 </div>
             </div>

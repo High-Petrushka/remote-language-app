@@ -126,7 +126,7 @@ export function Profile() {
     if (newAvatar) {
         avatarComp = <Avatar imgSrc={URL.createObjectURL(document.getElementById("avatar").files[0])} imgAlt="New user avatar" width="[clamp(250px,40vw,350px)]" />
     } else {
-        avatarComp = userInfo["avatar"] ? <img src={userInfo["avatar"]} className="w-[clamp(250px,40vw,350px)] h-auto aspect-square rounded-full mx-auto" /> : <img src="/src/assets/icons/user.svg" className="w-[clamp(250px,40vw,350px)] rounded-full mx-auto" />
+        avatarComp = userInfo["avatar"] ? <img src={userInfo["avatar"]} className="w-[clamp(250px,40vw,350px)] h-auto aspect-square rounded-full mx-auto" /> : <img src="/assets/icons/user.svg" className="w-[clamp(250px,40vw,350px)] rounded-full mx-auto" />
     }
 
     if (Number(params["userId"]) === curUser) {
@@ -172,7 +172,7 @@ export function Profile() {
                         className="w-50 cursor-pointer active:outline active:outline-zinc-900"
                         onChange={(e) => setNewAvatar(e.target.value)}
                     />
-                    <img src="/src/assets/icons/save.svg" alt="File icon" />
+                    <img src="/assets/icons/save.svg" alt="File icon" />
                 </div>)
     } else {
         nameComp = userInfo["first_name"] ? <ProfileUserInfo title={`${Common.lines[lang]["title"]["name"]}`} text={userInfo["first_name"]} /> : <ProfileUserInfo title={`${Common.lines[lang]["title"]["name"]}`} text="-" />;

@@ -17,7 +17,7 @@ export function UserListItem({ imgSrc, username, email, link, isActive, handleBl
                     imgSrc ? 
                         <img src={imgSrc} className="w-[clamp(50px,10vw,120px)] h-[clamp(50px,10vw,120px)] rounded-full" />
                     :
-                        <img src="/src/assets/icons/user.svg" className="w-[clamp(50px,10vw,120px)] h-auto rounded-full" />
+                        <img src="/assets/icons/user.svg" className="w-[clamp(50px,10vw,120px)] h-auto rounded-full" />
                 }
                 <h5 className="text-2xl lg:text-3xl font-semibold">{ username }</h5>
             </div>
@@ -45,7 +45,7 @@ export function UserListItem({ imgSrc, username, email, link, isActive, handleBl
                 }
                 <Link to={link} className="group flex items-center">
                     <span className="text-[16px] font-medium">{ Common.lines[lang]["button"]["profileBtn"] }</span>
-                    <img src="/src/assets/icons/arrow-right.svg" className="group-hover:translate-x-2 transition-transform duration-150" />
+                    <img src="/assets/icons/arrow-right.svg" className="group-hover:translate-x-2 transition-transform duration-150" />
                 </Link>
             </div>
         </div>

@@ -12,7 +12,7 @@ export function UserComment({ id, userId, lessonId, body, userAvatar, userName, 
                         userAvatar ?
                             <img src={userAvatar} alt="User avatar" className="w-12.5 aspect-square rounded-full" />
                         :
-                            <img src="/src/assets/icons/user.svg" alt="User avatar" className="w-12.5 aspect-square rounded-full" />
+                            <img src="/assets/icons/user.svg" alt="User avatar" className="w-12.5 aspect-square rounded-full" />
                     }
                     <Link to={`/profile/${userId}`}>
                         <Hero level={6}>{userName}</Hero>
@@ -21,7 +21,7 @@ export function UserComment({ id, userId, lessonId, body, userAvatar, userName, 
                 {
                     curUser && (curUser == userId || curUser == 1 || curUser == lessonAuthorId) ?
                         <img
-                            src="/src/assets/icons/trash.svg"
+                            src="/assets/icons/trash.svg"
                             alt="Trash icon" role="button"
                             className="cursor-pointer"
                             onClick={() => handleClick(id, lessonId)}
