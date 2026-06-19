@@ -127,7 +127,7 @@ MEDIA_URL = '/media/'
 AUTH_USER_MODEL = 'core_user.MyUser'
 
 # CORS_ALLOWED_ORIGINS = config('CORS_ALLOWED_ORIGINS', default='').split(',')
-CORS_ALLOWED_ORIGINS = ["remote-language-app-production.up.railway.app", "app.rlang.online"]
+CORS_ALLOWED_ORIGINS = ["https://remote-language-app-production.up.railway.app", "https://app.rlang.online"]
 
 CORS_ALLOW_HEADERS = list(default_headers) + [
     "Authorization",
