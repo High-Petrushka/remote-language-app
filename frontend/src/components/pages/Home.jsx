@@ -20,6 +20,8 @@ import { TextInput } from "../interaction/TextInput";
 import { RadioInput } from "../interaction/RadioInput";
 import { CookiePopUp } from "../interaction/CookiePopUp";
 
+import lessonIcon from "../../assets/features/lesson.svg"
+
 export function Home() {
   const [homeInfo, setHomeInfo] = useState([]);
   const [feedbackHidden, setFeedbackHidden] = useState(true);
@@ -123,7 +125,7 @@ export function Home() {
             <HomeFeature
               title={Common.lines[lang]["home"]["features"]["lessons"]["title"]}
               text={Common.lines[lang]["home"]["features"]["lessons"]["text"]}
-              imgSrc="/src/assets/features/lesson.svg"
+              imgSrc="/assets/features/lesson.svg"
               btnText={ Common.lines[lang]["button"]["seeLessons"] }
               handleBtn={() => navigate("/lessons")}
             />
