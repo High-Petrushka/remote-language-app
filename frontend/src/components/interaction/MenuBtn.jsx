@@ -9,7 +9,7 @@ export function MenuBtn() {
 
     return (
         <button onClick={handleClick} className="cursor-pointer">
-            <img src="/src/assets/menu.svg" />
+            <img src="/assets/menu.svg" />
         </button>
     );
 }

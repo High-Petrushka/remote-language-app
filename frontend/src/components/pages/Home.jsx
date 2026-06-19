@@ -112,7 +112,7 @@ export function Home() {
           <div></div>
           <img
             id="homeSun"
-            src="/src/assets/icons/sun.svg"
+            src="/assets/icons/sun.svg"
             alt="Sun image"
             className="absolute w-[clamp(150px,32vw,450px)] bottom-[-25%] md:hidden xl:block xl:bottom-[-50%] right-0"
           />
@@ -132,21 +132,21 @@ export function Home() {
             <HomeFeature
               title={Common.lines[lang]["home"]["features"]["tests"]["title"]}
               text={Common.lines[lang]["home"]["features"]["tests"]["text"]}
-              imgSrc="/src/assets/features/test.svg"
+              imgSrc="/assets/features/test.svg"
               btnText={Common.lines[lang]["button"]["findTests"]}
               handleBtn={() => navigate("/lessons")}
             />
             <HomeFeature
               title={Common.lines[lang]["home"]["features"]["creation"]["title"]}
               text={Common.lines[lang]["home"]["features"]["creation"]["text"]}
-              imgSrc="/src/assets/features/creation.svg"
+              imgSrc="/assets/features/creation.svg"
               btnText={ Common.lines[lang]["button"]["createLesson"] }
               handleBtn={() => navigate("/creation")}
             />
           </div>
         </HomeFeaturesLayout>
         <HomeCallToActionLayout>
-          <img src="/src/assets/icons/globe.svg" alt="Globe icon" className="w-16" />
+          <img src="/assets/icons/globe.svg" alt="Globe icon" className="w-16" />
           <div className="flex flex-col gap-4">
             <div className="flex flex-col gap-1 text-center">
               <Hero level={4}>{ Common.lines[lang]["home"]["callToAction"]["title"] }</Hero>

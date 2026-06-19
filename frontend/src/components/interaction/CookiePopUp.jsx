@@ -14,7 +14,7 @@ export function CookiePopUp({ handleConfirm }) {
         <div className="w-[min(1280px,92%)] my-0 px-4 py-4 mx-auto bg-neutral-50 shadow-2xl rounded-md fixed z-10 bottom-4" style={isConfirmed ? {"display": "none"} : {"display": "block"}}>
             <CookiePopUpLayout>
                 <div className="flex items-center gap-4">
-                    <img src="/src/assets/icons/cookie.svg" alt="Cookie image " className="min-w-8" />
+                    <img src="/assets/icons/cookie.svg" alt="Cookie image " className="min-w-8" />
                     <p>{Common.lines[lang]["home"]["policy"]["text"]} <Link to={"/policy"} className="text-indigo-400 underline">{Common.lines[lang]["home"]["policy"]["call"]}</Link></p>
                 </div>
                 <div className="w-full lg:w-fit">

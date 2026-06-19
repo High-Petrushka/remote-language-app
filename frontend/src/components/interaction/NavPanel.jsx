@@ -51,32 +51,32 @@ export function NavPanel() {
         >
             <NavPanelLayout>
                 <NavLinksLayout>
-                    <MyNavLink path="/" iconSrc={"/src/assets/menu/house.svg"}>{Common.lines[lang]["menu"]["home"]}</MyNavLink>
-                    <MyNavLink path="/lessons" iconSrc={"/src/assets/menu/lessons.svg"}>{Common.lines[lang]["menu"]["lessons"]}</MyNavLink>
-                    <MyNavLink path="/authors" iconSrc={"/src/assets/menu/authors.svg"}>{Common.lines[lang]["menu"]["authors"]}</MyNavLink>
+                    <MyNavLink path="/" iconSrc={"/assets/menu/house.svg"}>{Common.lines[lang]["menu"]["home"]}</MyNavLink>
+                    <MyNavLink path="/lessons" iconSrc={"/assets/menu/lessons.svg"}>{Common.lines[lang]["menu"]["lessons"]}</MyNavLink>
+                    <MyNavLink path="/authors" iconSrc={"/assets/menu/authors.svg"}>{Common.lines[lang]["menu"]["authors"]}</MyNavLink>
                     <div className="pt-3 mt-3 border-t border-zinc-900">
                         {token && userId == 1 ?
-                            <MyNavLink path="/feedback" iconSrc={"/src/assets/menu/feedback.svg"}>{Common.lines[lang]["menu"]["feedback"]}</MyNavLink>
+                            <MyNavLink path="/feedback" iconSrc={"/assets/menu/feedback.svg"}>{Common.lines[lang]["menu"]["feedback"]}</MyNavLink>
                         :
                         null
                         }
                         {token && !(userId == 1) ?
-                            <MyNavLink path="/creation" iconSrc={"/src/assets/menu/plus.svg"}>{Common.lines[lang]["menu"]["create"]}</MyNavLink>
+                            <MyNavLink path="/creation" iconSrc={"/assets/menu/plus.svg"}>{Common.lines[lang]["menu"]["create"]}</MyNavLink>
                         :
                             null
                         }
                         {token && !(userId == 1)? 
-                            <MyNavLink path={`/profile/${userId}`} iconSrc={"/src/assets/menu/menu-user.svg"}>{Common.lines[lang]["menu"]["profile"]}</MyNavLink>
+                            <MyNavLink path={`/profile/${userId}`} iconSrc={"/assets/menu/menu-user.svg"}>{Common.lines[lang]["menu"]["profile"]}</MyNavLink>
                         :
                         null
                         }
                         {!token ? 
-                        <MyNavLink path="/login" iconSrc={"/src/assets/menu/login.svg"}>{Common.lines[lang]["menu"]["login"]}</MyNavLink>
+                        <MyNavLink path="/login" iconSrc={"/assets/menu/login.svg"}>{Common.lines[lang]["menu"]["login"]}</MyNavLink>
                         : 
-                        <MyNavLink path="/login" inverse={true} iconSrc={"/src/assets/menu/logout.svg"}>{Common.lines[lang]["menu"]["logout"]}</MyNavLink>
+                        <MyNavLink path="/login" inverse={true} iconSrc={"/assets/menu/logout.svg"}>{Common.lines[lang]["menu"]["logout"]}</MyNavLink>
                         }
                         {!token ? 
-                            <MyNavLink path="/registration" iconSrc={"/src/assets/menu/registration.svg"}>{Common.lines[lang]["menu"]["registration"]}</MyNavLink>
+                            <MyNavLink path="/registration" iconSrc={"/assets/menu/registration.svg"}>{Common.lines[lang]["menu"]["registration"]}</MyNavLink>
                         :
                         null
                         }

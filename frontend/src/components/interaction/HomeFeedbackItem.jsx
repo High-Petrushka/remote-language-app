@@ -11,7 +11,7 @@ export function HomeFeedbackItem({ username, userId, grade, text }) {
                 <div className="flex gap-1 justify-center">
                     {
                         gradeArray.map((_, index) => {
-                            return <img key={index} src="/src/assets/icons/star.svg" alt="Star icon" className="w-4.5" />
+                            return <img key={index} src="/assets/icons/star.svg" alt="Star icon" className="w-4.5" />
                         })
                     }
                 </div>
